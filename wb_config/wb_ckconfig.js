@@ -14,7 +14,7 @@
  #########################################################################################
 */
 
-// required settings to make CKEditor work with Website Baker (do not change them)
+// required settings to make CKEditor work with WebsiteBaker (do not change them)
     CKConfig.Plugins.Add( 'WBModules', 'en,nl,de' ) ;
     CKConfig.Plugins.Add( 'WBDroplets', 'en,nl,de' ) ;
 //  CKConfig.Plugins.Add( 'youtube', 'en,ja,de' );
@@ -77,7 +77,7 @@ CKConfig.AutoGrowMax = 600 ;
 // #########################################################################################
 
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-//  Default toolbar set used by Website Baker
+//  Default toolbar set used by WebsiteBaker
 // ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
    CKConfig.ToolbarSets["Original"] = [
 	['Source','Save'],
