@@ -7,10 +7,10 @@ body
 {
 	/* Font */
 	font-family: Arial, Verdana, sans-serif;
-	font-size: 18px;
+	font-size: 12px;
 
 	/* Text color */
-	color: #f086f0;
+	color: #222;
 
 	/* Remove the background color to make it transparent */
 	background-color: #ccc;

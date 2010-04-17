@@ -10,6 +10,7 @@
 // Register the related commands.
 CKEDITOR.plugins.add('WBDroplets',
 {
+    requires: ['iframedialog'],
     init: function(editor)
     {
         var pluginName = 'WBDroplets';

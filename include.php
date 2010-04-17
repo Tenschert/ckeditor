@@ -10,22 +10,25 @@
  */
 
 // prevent this file from being accessed directly
-if(!defined('WB_PATH')) die(header('Location: index.php'));
+//if(!defined('WB_PATH')) die(header('Location: index.php'));
 
 function reverse_htmlentities($mixed) {
     $mixed = str_replace(array('&gt;','&lt;','&quot;','&amp;'), array('>','<','"','&'), $mixed);
     return $mixed;
 }
 
-/*function get_template_name() {
+function get_template_name() {
     // returns the template name of the current displayed page
     require_once(WB_PATH. '/framework/class.database.php');
 
     // work out default editor.css file for CKEditor
     if(file_exists(WB_PATH .'/templates/' .DEFAULT_TEMPLATE .'/editor.css')) {
         $ck_template_dir = DEFAULT_TEMPLATE;
+    } 
+    elseif(file_exists(WB_PATH .'/templates/' .DEFAULT_TEMPLATE .'/css/editor.css')) {
+        $ck_template_dir = DEFAULT_TEMPLATE;
     } else {
-        $ck_template_dir = "none";
+        $ck_template_dir = WB_PATH ."/modules/ckeditor/wb_config/contents.css";
     }
 
     // check if an editor.css file exists in the specified template directory of current page
@@ -45,20 +48,24 @@ function reverse_htmlentities($mixed) {
             if(file_exists(WB_PATH.'/templates/'.$pagetpl.'/editor.css')) {
                 $ck_template_dir = $pagetpl;
             }
+            elseif(file_exists(WB_PATH.'/templates/'.$pagetpl.'/css/editor.css')) {
+                $ck_template_dir = $pagetpl;
+            }
         }
+    }
+    else {
+        $ck_template_dir = WB_PATH ."/modules/ckeditor/wb_config/contents.css";
     }
     return $ck_template_dir;
 }
-*/
+
 function show_wysiwyg_editor($name, $id, $content, $width, $height) {
     // create new CKeditor instance
-    require_once(WB_PATH.'/modules/ckeditor/ckeditor/ckeditor.php');
-    $oCKEditor = new CKEditor($name);
-    $oCKEditor->basePath = WB_URL.'/modules/ckeditor/ckeditor/';
-    $config = array();
-    $oCKEditor->editor($name, reverse_htmlentities($content), $config);
-
-    // obtain template name of current page (if empty, no editor.css files exists)
-    //$template_name = get_template_name();
+    include_once(WB_PATH.'/modules/ckeditor/ckeditor/ckeditor.php');
+    $ckeditor = new CKEditor($name);
+    $ckeditor->basePath = WB_URL.'/modules/ckeditor/ckeditor/';
+    $template_name = get_template_name();
+    $ckeditor->config['contentsCss'] = $template_name;
+    $ckeditor->editor($name, reverse_htmlentities($content));
 }
 ?>

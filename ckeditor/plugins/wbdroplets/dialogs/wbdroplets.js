@@ -9,32 +9,28 @@
 CKEDITOR.dialog.add( 'WBDropletsDlg', function( editor ) {
     return { 
         title: 'WB Link - Insert WebsiteBaker Droplet',
-        minWidth: 150,
+        minWidth: 300,
         minHeight: 300,
         contents: [ 
             {
-                id: 'tab1',
-                label: 'Tab1',
+                id: 'iframe',
+                label: 'WB Droplets',
+                expand : true,
                 title: 'Tab1',
                 elements : [{
-                        id: 'wbdroplets',
-                        type: 'text',
-                        label: "Droplets",
-                        validate : function() {}
+                        type: 'iframe',
+                        src : 'http://localhost/web/wbtemp/modules/ckeditor/ckeditor/plugins/wbdroplets/dialogs/wbdroplets.php',
+                        width : '100%',
+                        height : '100%',
+                        onContentLoad : function() {
+                            var iframe = document.getElementById( this._.frameId );
+                            iframeWindow = iframe.contentWindow;
+                        }
                     },] 
             }
             ],
          onOk: function() {
-             //Validate is option is selected
-             var oDropletList = document.getElementById( 'cmbDroplets' ) ;
-             if(oDropletList.selectedIndex == -1) {
-                 alert( FCKLang.WBDropletsErrPageSelect );
-                 return false;
-             };
-             var oTagLink = document.getElementById( 'chkTaglink' );
-             var sDropletStr = oDropletList[oDropletList.selectedIndex].value;
-             CK.InsertHtml("[[" + sDropletStr + "]]");
-             return true;
+             this._.editor.insertHtml(iframeWindow.getElementById('test').value);
          },
          resizable: 3
     };

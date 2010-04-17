@@ -6,7 +6,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 CKEDITOR.editorConfig       = function( config )
 {
     config.uiColor          = '#bcd5eb';
-    config.contentsCss      = '../../modules/ckeditor/wb_config/contents.css';
+    //config.contentsCss      = '../../modules/ckeditor/wb_config/contents.css';
     
     config.indentClasses    = [ 'indent1', 'indent2', 'indent3', 'indent4' ];
     config.justifyClasses   = [ 'left', 'center', 'right', 'justify' ];
@@ -35,13 +35,14 @@ CKEDITOR.editorConfig       = function( config )
     config.resize_maxHeight = 1200;
 
     // ######### Filebrowser ############
-    config.filebrowserBrowseUrl     = '../../admin/media/browse.php',
-    //config.filebrowserUploadUrl   = '../../../templates/wb_theme/templates/media_browse.htt',
-    config.filebrowserUploadUrl     = '../../admin/media/upload.php',
-    config.filebrowserWindowWidth   = '800',
-    config.filebrowserWindowHeight  = '500',
+    
+    config.filebrowserBrowseUrl     = '../../admin/media/browse.php';
+    config.filebrowserUploadUrl     = '../../admin/media/upload.php';
+    config.filebrowserWindowWidth   = '800';
+    config.filebrowserWindowHeight  = '500';
     
     // Protect PHP code tags (<?...?>) so CKEditor will not break them when switching from Source to WYSIWYG.
     // Uncommenting this line doesn't mean the user will not be able to type PHP code in the source. This         // kind of prevention must be done in the server side, so just leave this line as is.
     config.protectedSource.push(/<\?[\s\S]*?\?>/g); // PHP Code
 };
+window.opener.CKEDITOR.tools.callFunction( 2, fileUrl );

@@ -10,14 +10,14 @@
  */
 
 // Include the config file
-require('../../../../../../../config.php');
+require('../../../../../../config.php');
 
 // Create new admin object
 require(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages_modify', false);
 
 // Setup the template
-$template = new Template(WB_PATH.'/modules/ckeditor/ckeditor/editor/plugins/wbdroplets/dialogs()');
+$template = new Template(WB_PATH.'/modules/ckeditor/ckeditor/plugins/wbdroplets/dialogs');
 $template->set_file('page', 'wbdroplets.htt');
 $template->set_block('page', 'main_block', 'main');
 
