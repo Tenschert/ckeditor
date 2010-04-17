@@ -17,7 +17,7 @@ function reverse_htmlentities($mixed) {
     return $mixed;
 }
 
-function get_template_name() {
+/*function get_template_name() {
     // returns the template name of the current displayed page
     require_once(WB_PATH. '/framework/class.database.php');
 
@@ -49,23 +49,16 @@ function get_template_name() {
     }
     return $ck_template_dir;
 }
-
+*/
 function show_wysiwyg_editor($name, $id, $content, $width, $height) {
     // create new CKeditor instance
     require_once(WB_PATH.'/modules/ckeditor/ckeditor/ckeditor.php');
     $oCKEditor = new CKEditor($name);
     $oCKEditor->basePath = WB_URL.'/modules/ckeditor/ckeditor/';
     $config = array();
-    /**
-    * Example for the config:
-    * $config['toolbar'] = array(
-    *    array( 'Source', '-', 'Bold', 'Italic', 'Underline', 'Strike' ),
-    *    array( 'Image', 'Link', 'Unlink', 'Anchor' )
-    * ); 
-    */
     $oCKEditor->editor($name, reverse_htmlentities($content), $config);
 
     // obtain template name of current page (if empty, no editor.css files exists)
-    $template_name = get_template_name();
+    //$template_name = get_template_name();
 }
 ?>

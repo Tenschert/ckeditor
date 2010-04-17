@@ -7,13 +7,13 @@ body
 {
 	/* Font */
 	font-family: Arial, Verdana, sans-serif;
-	font-size: 12px;
+	font-size: 18px;
 
 	/* Text color */
-	color: #222;
+	color: #f086f0;
 
 	/* Remove the background color to make it transparent */
-	background-color: #fff;
+	background-color: #ccc;
 }
 
 html
@@ -32,4 +32,7 @@ img:-moz-broken
 img, input, textarea
 {
 	cursor: default;
+}
+h1 {
+	color: #003366;
 }
