@@ -14,7 +14,7 @@ CKEDITOR.addTemplates( 'default',
 	templates :
 		[
 			{
-				title: 'Image and Title',
+				title: 'Image and Title2',
 				image: 'template1.gif',
 				description: 'One main image with a title and text that surround the image.',
 				html:
@@ -27,7 +27,7 @@ CKEDITOR.addTemplates( 'default',
 					'</p>'
 			},
 			{
-				title: 'Strange Template',
+				title: 'Strange Template2',
 				image: 'template2.gif',
 				description: 'A template that defines two colums, each one with a title, and some text.',
 				html:
@@ -56,7 +56,7 @@ CKEDITOR.addTemplates( 'default',
 					'</p>'
 			},
 			{
-				title: 'Text and Table',
+				title: 'Text and Table2',
 				image: 'template3.gif',
 				description: 'A title with some text and a table.',
 				html:
