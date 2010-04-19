@@ -527,7 +527,7 @@ CKEDITOR.dialog.add( 'link', function( editor )
                                          filebrowser :
                                          {
                                              action : 'Browse',
-                                             url : '../../'
+                                             url : '../../modules/ckeditor/ckeditor/plugins/link/dialogs/wbmodules.php'
                                          }
                                      }
                                 ]

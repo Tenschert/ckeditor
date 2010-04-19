@@ -29,8 +29,10 @@ CKEDITOR.dialog.add( 'WBDropletsDlg', function( editor ) {
                     },] 
             }
             ],
-         onOk: function() {
+         onClick: function() {
+             CKEDITOR.dialog.getCurrent().getValueOf("info", "txtUrl")
              this._.editor.insertHtml(iframeWindow.getElementById('test').value);
+             
          },
          resizable: 3
     };

@@ -5,14 +5,12 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 CKEDITOR.editorConfig       = function( config )
 {
-    config.uiColor          = '#bcd5eb';
-    //config.contentsCss      = '../../modules/ckeditor/wb_config/contents.css';
-    
-    config.indentClasses    = [ 'indent1', 'indent2', 'indent3', 'indent4' ];
-    config.justifyClasses   = [ 'left', 'center', 'right', 'justify' ];
+    config.uiColor                  = '#bcd5eb';
+    config.indentClasses            = [ 'indent1', 'indent2', 'indent3', 'indent4' ];
+    config.justifyClasses           = [ 'left', 'center', 'right', 'justify' ];
     // [ Left, Center, Right, Justified ] Both options are for XHTML 1.0 strict compatibility
     
-    config.extraPlugins     = 'WBDroplets,uicolor';
+    config.extraPlugins             = 'WBDroplets,uicolor';
     config.toolbar_Full     = [['Source','-','Save','NewPage','Preview','-','Templates'],['Cut','Copy','Paste','PasteText','PasteFromWord','-','Print','SpellChecker','Scayt'],['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],['Form','Checkbox','Radio','TextField','Textarea','Select','Button','ImageButton','HiddenField'],'/',['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],['NumberedList','BulletedList','-','Outdent','Indent','Blockquote','CreateDiv'],['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],['WBDroplets','Link','Unlink','Anchor'],['Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],'/',['Styles','Format','Font','FontSize'],['TextColor','BGColor'],['Maximize','ShowBlocks','-','UIColor','About']];
     config.toolbar_WB_Basic     = [['Source','Preview'],['Cut','Copy','Paste','PasteText','PasteFromWord','-','Print','SpellChecker','Scayt'],['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],'/',['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],['NumberedList','BulletedList','-','Outdent','Indent','Blockquote','CreateDiv'],['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],['WBDroplets','Link','Unlink','Anchor'],['Image','Flash','Table','HorizontalRule','SpecialChar'],'/',['Styles','Format','Font','FontSize'],['TextColor','BGColor'],['Maximize','ShowBlocks','-','UIColor','About']];
     config.toolbar_WB_Full     = [['Source','-','Preview','Templates'],['Cut','Copy','Paste','PasteText','PasteFromWord','-','Print','SpellChecker','Scayt'],['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],'/',['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],['NumberedList','BulletedList','-','Outdent','Indent','Blockquote','CreateDiv'],['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],['WBDroplets','Link','Unlink','Anchor'],['Image','Flash','Table','HorizontalRule','Smiley','SpecialChar'],'/',['Styles','Format','Font','FontSize'],['TextColor','BGColor'],['Maximize','ShowBlocks','-','UIColor','About']];

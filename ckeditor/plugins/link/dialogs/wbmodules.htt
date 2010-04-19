@@ -1,0 +1,102 @@
+<!-- BEGIN main_block -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>WB Link - Insert Website Baker Link</title>
+		<meta http-equiv="Content-Type" content="text/html; charset={CHARSET}">
+		<meta content="noindex, nofollow" name="robots">
+		<script type="text/javascript" src="fckwbmodules.js"></script>
+		<script type="text/javascript">
+		<!--
+			var oEditor			= window.parent.InnerDialogLoaded(); 
+			var FCK				= oEditor.FCK; 
+			var FCKLang			= oEditor.FCKLang ;
+			var FCKConfig		= oEditor.FCKConfig ;
+			//var FCKCMSCCMSModules	= oEditor.FCKCMSModules; 
+			 
+			// oLink: The actual selected link in the editor.
+			var oLink = FCK.Selection.MoveToAncestorNode( 'A' ) ;
+			if ( oLink )
+				FCK.Selection.SelectNode( oLink ) ;
+	
+			window.onload = function ()	{ 
+				// First of all, translates the dialog box texts.
+				oEditor.FCKLanguageManager.TranslatePage(document);
+				
+				LoadSelected();							//See function below 
+				window.parent.SetOkButton( true );		//Show the "Ok" button. 
+				
+			} 
+			 
+			//If an anchor (A) object is currently selected, load the properties into the dialog 
+			function LoadSelected()	{
+				var sSelected;
+
+				if ( oEditor.FCKBrowserInfo.IsGecko || oEditor.FCKBrowserInfo.IsSafari || oEditor.FCKBrowserInfo.IsChrome ) {
+					sSelected = FCK.EditorWindow.getSelection();
+				} else {
+					sSelected = FCK.EditorDocument.selection.createRange().text;
+				}
+
+				if ( sSelected == "" ) {
+					alert( FCKLang.WBModulesErrSelection );
+					window.parent.Cancel();
+				}
+
+			}
+
+			//Code that runs after the OK button is clicked 
+			function Ok() {
+				//Validate is option is selected
+				var oPageList = document.getElementById( 'cmbPages' ) ;
+				if(oPageList.selectedIndex == -1) {
+					alert( FCKLang.WBModulesErrPageSelect );
+					return false;
+				}
+				
+				var oTagLink = document.getElementById( 'chkTaglink' );
+				
+				var sPageId = oPageList[oPageList.selectedIndex].value;
+				oLink = oEditor.FCK.CreateLink( sPageId ) ;
+				// the following line was commented out as it creates an error message in some browser (e.g. IE)
+				// even Firefox seems not to make use of the title so we remove this option for know (doc)
+				// SetAttribute( oLink, 'title', document.getElementById( 'txtTitle' ).value ) ;
+			return true;
+
+			} 
+			
+		//-->
+		</script>
+	</head>
+			
+	<body scroll="no" style="overflow:hidden;">
+		 <table height="100%" cellSpacing="0" cellPadding="0" width="100%" border="0"> 
+		 	<tr> 
+				<td>
+					<table width="100%">
+						<tr>
+							<td colspan="2"><span fckLang="WBModuleslblPageSelection">Select a WB Page to link to:</span>&nbsp;</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<select id="cmbPages" style="WIDTH: 100%" size="14" name="cmbPages">
+									<!-- BEGIN page_list_block -->
+									<option value="{LINK}"{SELECTED}>{TITLE}</option>
+									<!-- END page_list_block -->
+								</select>
+							</td>
+						</tr>
+						<!-- commented out as this option will not work in all browsers (doc)
+						<tr>
+							<td nowrap><span fckLang="WBModuleslblTitle">Title</span>&nbsp;</td>
+							<td width="100%" style="align:right;"><input id="txtTitle" style="WIDTH: 98%" type="text" name="txtTitle"></td>
+						</tr>
+						-->
+					</table>
+				</td>
+			</tr>
+		</table>
+		
+	</body>
+</html> 
+<!-- END main_block -->
