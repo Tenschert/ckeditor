@@ -1,6 +1,12 @@
-CKLang.WBDropletsBtn			= 'WB Droplets einf\u00fcgen' ;
-CKLang.WBDropletsDlgTitle		= 'WB Droplets' ;
-CKLang.WBDropletsDlgName		= 'WebsiteBaker Droplet einf\u00fcgen' ;
-CKLang.WBDropletsErrPageSelect		= 'Bitte eine Droplet markieren, das eingef\u00fcgt werden soll!' ;
-CKLang.WBDropletslblPageSelection	= 'Auswahlfenster der m\u00f6glichen Droplets:';
-CKLang.WBDropletslblTitle		= 'Titel:';
+CKEDITOR.plugins.setLang( 'WBDroplets', 'de',
+{
+    wbdroplets :
+    {
+        btn :                'WB Droplets einfügen',
+        title :              'WB Droplets',
+        name :               'WebsiteBaker Droplet einfügen',
+        errpageselect :      'Bitte eine Droplet markieren, das eingefügt werden soll!',
+        lblpageselection :   'Auswahlfenster der möglichen Droplets:',
+        lbltitle :           'Titel:',
+    }
+})

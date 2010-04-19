@@ -1,6 +1,12 @@
-CKLang.WBDropletsBtn			= 'Insert WB Droplets into page' ;
-CKLang.WBDropletsDlgTitle		= 'WB Droplets' ;
-CKLang.WBDropletsDlgName		= 'WebsiteBaker droplet insert' ;
-CKLang.WBDropletsErrPageSelect		= 'Please select a Droplet to insert on page' ;
-CKLang.WBDropletslblPageSelection	= 'Select a Droplet to insert on page:';
-CKLang.WBDropletslblTitle		= 'Title';
+CKEDITOR.plugins.setLang( 'WBDroplets', 'en',
+{
+    wbdroplets :
+    {
+        btn :                'Insert WB Droplets into page',
+        title :              'WB Droplets',
+        name :               'WebsiteBaker droplet insert',
+        errpageselect :      'Please select a Droplet to insert on page!',
+        lblpageselection :   'Select a Droplet to insert on page:',
+        lbltitle :           'Title:',
+    }
+})

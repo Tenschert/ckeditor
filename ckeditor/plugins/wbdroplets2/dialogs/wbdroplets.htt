@@ -1,0 +1,101 @@
+<!-- BEGIN main_block -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<title>WB Link - Insert WebsiteBaker Droplet</title>
+		<meta http-equiv="Content-Type" content="text/html; charset={CHARSET}" />
+		<meta name="robots" content="noindex, nofollow" />
+		<script type="text/javascript" src="wbdroplets.js"></script>
+		<script type="text/javascript">
+		<!--
+			var oEditor			= window.parent.InnerDialogLoaded(); 
+			var FCK				= oEditor.FCK; 
+			var FCKLang			= oEditor.FCKLang ;
+			var FCKConfig		= oEditor.FCKConfig ;
+			//var FCKCMSCCMSModules	= oEditor.FCKCMSModules; 
+			 
+			// oLink: The actual selected link in the editor.
+			var oLink = FCK.Selection.MoveToAncestorNode( 'A' ) ;
+			if ( oLink )
+				FCK.Selection.SelectNode( oLink ) ;
+	
+			window.onload = function ()	{ 
+				// First of all, translates the dialog box texts.
+				oEditor.FCKLanguageManager.TranslatePage(document);
+				
+				window.parent.SetOkButton( true );		//Show the "Ok" button. 
+				
+			} 
+			 
+			//If an anchor (A) object is currently selected, load the properties into the dialog 
+			function LoadSelected()	{
+				var sSelected;
+				
+				if ( oEditor.FCKBrowserInfo.IsGecko ) {
+					sSelected = FCK.EditorWindow.getSelection();
+				} else {
+					sSelected = FCK.EditorDocument.selection.createRange().text;
+				}
+			}
+
+			//Code that runs after the OK button is clicked 
+			function Ok() {
+				//Validate is option is selected
+				var oDropletList = document.getElementById( 'cmbDroplets' ) ;
+				if(oDropletList.selectedIndex == -1) {
+					alert( FCKLang.WBDropletsErrPageSelect );
+					return false;
+				}
+				
+				var oTagLink = document.getElementById( 'chkTaglink' );
+				
+				var sDropletStr = oDropletList[oDropletList.selectedIndex].value;
+				FCK.InsertHtml("[[" + sDropletStr + "]]");
+				// the following line was commented out as it creates an error message in some browser (e.g. IE)
+				// even Firefox seems not to make use of the title so we remove this option for know (doc)
+				// SetAttribute( oLink, 'title', document.getElementById( 'txtTitle' ).value ) ;
+			return true;
+
+			}
+			
+			var oldid = 'LoginBox';
+			
+			function showdetail(obj) {
+				var olditem = document.getElementById(oldid);
+				var newitem = document.getElementById(obj.value);
+				olditem.className='hidden';
+				newitem.className='unhidden';
+				oldid = obj.value;
+			}
+		//-->
+		</script>
+		<style>
+			.hidden { display: none; }
+			.unhidden { display: block; }
+		</style>
+	</head>
+	<body scroll="yes" >
+		<table height="100%" cellSpacing="0" cellPadding="0" width="100%" border="0"> 
+			<tr> 
+				<td>
+					<table width="100%">
+						<tr> 
+							<td colspan="2"><span fckLang="WBDropletslblPageSelection">Select a Droplet to insert on page:</span>&nbsp;</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<select id="cmbDroplets" style="WIDTH: 100%" size="10" name="cmbDroplets"  onchange="javascript:showdetail(this);" >
+									<!-- BEGIN droplets_list_block -->
+									<option value="{TITLE}"{SELECTED}>{TITLE}</option>
+									<!-- END droplets_list_block -->
+								</select>
+							</td>
+						</tr>
+					</table>
+					{LIST}
+				</td>
+			</tr>
+		</table>		
+	</body>
+</html> 
+<!-- END main_block -->

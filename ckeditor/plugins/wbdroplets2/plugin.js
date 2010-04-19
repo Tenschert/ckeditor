@@ -8,20 +8,19 @@
  */
 
 // Register the related commands.
-CKEDITOR.plugins.add('WBDroplets',
+CKEDITOR.plugins.add('WBDroplets2',
 {
-    lang : ['en','de','nl'],
     requires: ['iframedialog'],
     init: function(editor)
     {
-        var pluginName = 'WBDroplets';
-        editor.addCommand('WBDropletsDlg', new CKEDITOR.dialogCommand('WBDropletsDlg'));
-        editor.ui.addButton('WBDroplets',
+        var pluginName = 'WBDroplets2';
+        editor.addCommand('WBDroplets2Dlg', new CKEDITOR.dialogCommand('WBDroplets2Dlg'));
+        editor.ui.addButton('WBDroplets2',
             {
-                label: editor.lang.wbdroplets.btn,
-                command: 'WBDropletsDlg',
+                label: 'WB Droplets2 Old!',
+                command: 'WBDroplets2Dlg',
                 icon: this.path + 'images/wbdroplets.gif'
             });
-        CKEDITOR.dialog.add('WBDropletsDlg', this.path + 'dialogs/wbdroplets.js');
+        CKEDITOR.dialog.add('WBDroplets2Dlg', this.path + 'dialogs/wbdroplets.js');
     }
 });

@@ -6,9 +6,9 @@
  * @link            http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/lgpl.html
  */
-CKEDITOR.dialog.add( 'WBDropletsDlg', function( editor ) {
+CKEDITOR.dialog.add( 'WBDroplets2Dlg', function( editor ) {
     return { 
-        title: editor.lang.wbdroplets.name,
+        title: 'WB Link - Insert WebsiteBaker Droplet',
         minWidth: 300,
         minHeight: 300,
         contents: [ 
@@ -31,6 +31,7 @@ CKEDITOR.dialog.add( 'WBDropletsDlg', function( editor ) {
             ],
          onOk: function() {
              this._.editor.insertHtml(iframeWindow.getElementById('test').value);
+             //Validate is option is selected
          },
          resizable: 3
     };

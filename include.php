@@ -10,7 +10,7 @@
  */
 
 // prevent this file from being accessed directly
-//if(!defined('WB_PATH')) die(header('Location: index.php'));
+if(!defined('WB_PATH')) die(header('Location: index.php'));
 
 function reverse_htmlentities($mixed) {
     $mixed = str_replace(array('&gt;','&lt;','&quot;','&amp;'), array('>','<','"','&'), $mixed);
