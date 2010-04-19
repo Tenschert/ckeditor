@@ -64,8 +64,16 @@ function show_wysiwyg_editor($name, $id, $content, $width, $height) {
     include_once(WB_PATH.'/modules/ckeditor/ckeditor/ckeditor.php');
     $ckeditor = new CKEditor($name);
     $ckeditor->basePath = WB_URL.'/modules/ckeditor/ckeditor/';
+    // obtain template name of current page (if empty, no editor.css files exists)
     $template_name = get_template_name();
-    $ckeditor->config['contentsCss'] = $template_name;
+    if($template_name == "none") {
+        // no editor.css file exists in default template folder, or template folder of current page
+        $css_file = WB_URL .'/modules/ckeditor/wb_config/contents.css';
+    } else {
+        // editor.css file exists in default template folder or template folder of current page
+        $css_file = WB_URL .'/templates/' .$template_name .'/editor.css';
+    }
+    $ckeditor->config['contentsCss'] = $css_file;
     $ckeditor->editor($name, reverse_htmlentities($content));
 }
 ?>
