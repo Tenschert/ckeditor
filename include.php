@@ -150,9 +150,10 @@ function show_wysiwyg_editor($name, $id, $content, $width, $height)
         // editor.css file exists in default template folder or template folder of current page
         $css_file = WB_URL . '/templates/' . $css_template_name . '/editor.css';
         }
-        
     // obtain template name of current page for editor.styles.js (if empty, no editor.styles.js files exists)
     $styles_template_name = get_styles_template_name();
+    // There seems to be some big problem with either $css_file and $styles_url when no .js / .css is in the      // template. Everything works fine when there is some... More and more I think a class would be better.
+    $ckeditor->config['contentsCss'] = $css_file;
 
     if ($styles_template_name == "none")
         {
@@ -164,18 +165,18 @@ function show_wysiwyg_editor($name, $id, $content, $width, $height)
         // editor.styles.js file exists in default template folder or template folder of current page
         $styles_url = WB_URL . '/templates/' . $styles_template_name . '/editor.styles.js';
         }
-    // Configure the styles sheets. The styles_set needs to be set in each editor.styles.js!
+    // The Styles dropdown in the editor. The styles_set needs to be set in each editor.styles.js!
     $styles_set                           = "wb";
     $styles_file                          = $styles_set . ':' . $styles_url;
+    $ckeditor->config['stylesSet']        = $styles_file;
     
-    // There seems to be some big problem with either $css_file and $styles_url when no .js / .css is in the      // template. Everything works fine when there is some... More and more I think a class would be better.
-    $ckeditor->config['contentsCss']      =$css_file;
-    $ckeditor->config['stylesSet']        =$styles_file;
-    $ckeditor->config['templates']        ='default';
-    
-    // It doesn't seem to work... Perhaps we need to rewrite the whole include as ckeditor_class.php.
+    // The Templates list ("presets" like two columns with a picture) in the editor.
+    // The templates definition set to use. It accepts a comma separated list.
+    $ckeditor->config['templates']        = 'default';
+    // The list of templates definition files to load. 
     $ck_templates_files[] = WB_URL.'/modules/ckeditor/wb_config/editor.templates.js';
-    $ckeditor->config['templates_files'] = $ck_templates_files;
+    $ckeditor->config['templates_files']  = $ck_templates_files;
+    
     $ckeditor->editor($name, reverse_htmlentities($content));
 }
 ?>
