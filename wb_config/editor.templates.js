@@ -8,13 +8,13 @@ CKEDITOR.addTemplates( 'default',
 {
 	// The name of sub folder which hold the shortcut preview images of the
 	// templates.
-	imagesPath : CKEDITOR.getUrl( CKEDITOR.plugins.getPath( 'templates' ) + 'templates/images2/' ),
+	imagesPath : CKEDITOR.getUrl( CKEDITOR.plugins.getPath( 'templates' ) + '/templates/images/' ),
 
 	// The templates definitions.
 	templates :
 		[
 			{
-				title: 'Image and Title2',
+				title: 'Image and Title',
 				image: 'template1.gif',
 				description: 'One main image with a title and text that surround the image.',
 				html:
@@ -27,7 +27,7 @@ CKEDITOR.addTemplates( 'default',
 					'</p>'
 			},
 			{
-				title: 'Strange Template2',
+				title: 'Strange Template',
 				image: 'template2.gif',
 				description: 'A template that defines two colums, each one with a title, and some text.',
 				html:
@@ -56,7 +56,7 @@ CKEDITOR.addTemplates( 'default',
 					'</p>'
 			},
 			{
-				title: 'Text and Table2',
+				title: 'Text and Table',
 				image: 'template3.gif',
 				description: 'A title with some text and a table.',
 				html:

@@ -31,21 +31,18 @@ CKEDITOR.editorConfig = function( config )
     config.uiColor                  = '#bcd5eb';
     
     // Both options are for XHTML 1.0 strict compatibility
-    config.indentClasses            = [ 'indent1', 'indent2', 'indent3', 'indent4' ];
+    // config.indentClasses            = [ 'indent1', 'indent2', 'indent3', 'indent4' ];
     // [ Left, Center, Right, Justified ] 
-    config.justifyClasses           = [ 'left', 'center', 'right', 'justify' ];
+    // config.justifyClasses           = [ 'left', 'center', 'right', 'justify' ];
     
-    config.templates                = 'default';
-    /*config.templates_files          = ['http://localhost/web/wbtemp/modules/ckeditor/wb_config/editor.templates.js'];*/
-    //config.templates_files =    ['../../modules/ckeditor/wb_config/editor.templates.js'];
     config.templates_replaceContent =   true;
     // Define all extra CKEditor plugins in _yourwb_/modules/ckeditor/ckeditor/plugins here
     config.extraPlugins             = 'WBDroplets,WBLink,uicolor';
     
     // Different Toolbars. Remove, add or move 'SomeButton', with the quotes and following comma 
-    config.toolbar_Full     = [['Source','-','Save','NewPage','Preview','-','Templates'],['Cut','Copy','Paste','PasteText','PasteFromWord','-','Print','SpellChecker','Scayt'],['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],['Form','Checkbox','Radio','TextField','Textarea','Select','Button','ImageButton','HiddenField'],'/',['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],['NumberedList','BulletedList','-','Outdent','Indent','Blockquote','CreateDiv'],['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],['WBDroplets','WBLink','Link','Unlink','Anchor'],['Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],'/',['Styles','Format','Font','FontSize'],['TextColor','BGColor'],['Maximize','ShowBlocks','-','UIColor','About']];
-    config.toolbar_WB_Basic     = [['Source','Preview'],['Cut','Copy','Paste','PasteText','PasteFromWord','-','Print','SpellChecker','Scayt'],['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],'/',['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],['NumberedList','BulletedList','-','Outdent','Indent','Blockquote','CreateDiv'],['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],['WBDroplets','WBLink','Link','Unlink','Anchor'],['Image','Flash','Table','HorizontalRule','SpecialChar'],'/',['Styles','Format','Font','FontSize'],['TextColor','BGColor'],['Maximize','ShowBlocks','-','UIColor','About']];
-    config.toolbar_WB_Full     = [['Source','-','Preview','Templates'],['Cut','Copy','Paste','PasteText','PasteFromWord','-','Print','SpellChecker','Scayt'],['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],'/',['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],['NumberedList','BulletedList','-','Outdent','Indent','Blockquote','CreateDiv'],['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],['WBDroplets','WBLink','Link','Unlink','Anchor'],['Image','Flash','Table','HorizontalRule','Smiley','SpecialChar'],'/',['Styles','Format','Font','FontSize'],['TextColor','BGColor'],['Maximize','ShowBlocks','-','UIColor','About']];
+    config.toolbar_Full     = [['Source','-','Save','NewPage','Preview','-','Templates'],['Cut','Copy','Paste','PasteText','PasteFromWord','-','Print','SpellChecker','Scayt'],['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],['Form','Checkbox','Radio','TextField','Textarea','Select','Button','ImageButton','HiddenField'],['Maximize','ShowBlocks','-','UIColor','About'],'/',['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],['NumberedList','BulletedList','-','Outdent','Indent','Blockquote','CreateDiv'],['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],['WBDroplets','WBLink','Link','Unlink','Anchor'],['Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],'/',['Styles','Format','Font','FontSize'],['TextColor','BGColor']];
+    config.toolbar_WB_Basic     = [['Source','Preview'],['Cut','Copy','Paste','PasteText','PasteFromWord'],['Image','Flash','Table','HorizontalRule'],['WBDroplets','WBLink','Link','Unlink','Anchor'],['Undo','Redo','-','SelectAll','RemoveFormat'],['Maximize','ShowBlocks','-','UIColor','About'],'/',['Styles','Format','Font','FontSize'],['TextColor','BGColor'],['Bold','Italic','Underline','Strike'],['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],['NumberedList','BulletedList','-','Outdent','Indent','Blockquote','CreateDiv']];
+    config.toolbar_WB_Full     = [['Source','-','Preview','Templates'],['Cut','Copy','Paste','PasteText','PasteFromWord','-','Print','SpellChecker','Scayt'],['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],['Maximize','ShowBlocks','-','UIColor','About'],'/',['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],['NumberedList','BulletedList','-','Outdent','Indent','Blockquote','CreateDiv'],['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],['WBDroplets','WBLink','Link','Unlink','Anchor'],['Image','Flash','Table','HorizontalRule','Smiley','SpecialChar'],'/',['Styles','Format','Font','FontSize'],['TextColor','BGColor']];
     config.toolbar_Basic    = [['Bold','Italic','-','NumberedList','BulletedList','-','Link','Unlink','-','About']];
     
     // The default toolbar. Default: WB_Full
@@ -83,8 +80,8 @@ CKEDITOR.editorConfig = function( config )
 
     // ---------- Filebrowser ----------
     
-    config.filebrowserBrowseUrl     = '../../admin/media/browse.php';
-    config.filebrowserUploadUrl     = '../../admin/media/upload.php';
+    config.filebrowserBrowseUrl = '../../admin/media/browse.php';
+    config.filebrowserUploadUrl = '../../admin/media/upload.php';
     config.filebrowserWindowWidth   = '800';
     config.filebrowserWindowHeight  = '500';
     
