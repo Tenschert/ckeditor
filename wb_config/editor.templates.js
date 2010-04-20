@@ -8,7 +8,7 @@ CKEDITOR.addTemplates( 'default',
 {
 	// The name of sub folder which hold the shortcut preview images of the
 	// templates.
-	imagesPath : CKEDITOR.getUrl( CKEDITOR.plugins.getPath( 'templates' ) + 'templates/images/' ),
+	imagesPath : CKEDITOR.getUrl( CKEDITOR.plugins.getPath( 'templates' ) + 'templates/images2/' ),
 
 	// The templates definitions.
 	templates :

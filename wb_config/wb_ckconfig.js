@@ -35,6 +35,10 @@ CKEDITOR.editorConfig = function( config )
     // [ Left, Center, Right, Justified ] 
     config.justifyClasses           = [ 'left', 'center', 'right', 'justify' ];
     
+    config.templates                = 'default';
+    /*config.templates_files          = ['http://localhost/web/wbtemp/modules/ckeditor/wb_config/editor.templates.js'];*/
+    //config.templates_files =    ['../../modules/ckeditor/wb_config/editor.templates.js'];
+    config.templates_replaceContent =   true;
     // Define all extra CKEditor plugins in _yourwb_/modules/ckeditor/ckeditor/plugins here
     config.extraPlugins             = 'WBDroplets,uicolor';
     

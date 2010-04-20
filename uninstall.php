@@ -13,5 +13,5 @@
 if(defined('WB_PATH') == false) { exit("Cannot access this file directly"); }
 
 // Delete the editor directory
-rm_full_dir(WB_PATH.'/modules/ckeditor');
+rm_full_dir(WB_PATH.'/modules/ckeditor/ckeditor');
 ?>
