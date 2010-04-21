@@ -29,15 +29,15 @@ function get_css_template_name()
     // work out default editor.css file for CKEditor
     if (file_exists(WB_PATH . '/templates/' . DEFAULT_TEMPLATE . '/editor.css'))
         {
-        $ck_css_template_dir=DEFAULT_TEMPLATE;
+        $ck_css_template_dir = DEFAULT_TEMPLATE;
         }
     elseif (file_exists(WB_PATH . '/templates/' . DEFAULT_TEMPLATE . '/css/editor.css'))
         {
-        $ck_css_template_dir=DEFAULT_TEMPLATE;
+        $ck_css_template_dir = DEFAULT_TEMPLATE . '/css';
         }
     else
         {
-        $ck_css_template_dir=WB_PATH . "/modules/ckeditor/wb_config/contents.css";
+        $ck_css_template_dir = "none";
         }
 
     // check if an editor.css file exists in the specified template directory of current page
@@ -64,13 +64,13 @@ function get_css_template_name()
                 }
             elseif (file_exists(WB_PATH . '/templates/' . $pagetpl . '/css/editor.css'))
                 {
-                $ck_css_template_dir=$pagetpl;
+                $ck_css_template_dir = $pagetpl . '/css';
+                }
+            else
+                {
+                $ck_css_template_dir = "none";
                 }
             }
-        }
-    else
-        {
-        $ck_css_template_dir = WB_PATH . "/modules/ckeditor/wb_config/contents.css";
         }
     return $ck_css_template_dir;
     }
@@ -84,15 +84,15 @@ function get_styles_template_name()
     // work out default editor.styles.js file for CKEditor
     if (file_exists(WB_PATH . '/templates/' . DEFAULT_TEMPLATE . '/editor.styles.js'))
         {
-        $ck_styles_template_dir=DEFAULT_TEMPLATE;
+        $ck_styles_template_dir = DEFAULT_TEMPLATE;
         }
     elseif (file_exists(WB_PATH . '/templates/' . DEFAULT_TEMPLATE . '/js/editor.styles.js'))
         {
-        $ck_styles_template_dir=DEFAULT_TEMPLATE;
+        $ck_styles_template_dir = DEFAULT_TEMPLATE . '/js';
         }
     else
         {
-        $ck_styles_template_dir=WB_PATH . "/modules/ckeditor/wb_config/editor.styles.js";
+        $ck_styles_template_dir = "none";
         }
 
     // check if an editor.css file exists in the specified template directory of current page
@@ -115,17 +115,17 @@ function get_styles_template_name()
             // check if a specify editor.styles.js file is contained in that folder
             if (file_exists(WB_PATH . '/templates/' . $pagetpl . '/editor.styles.js'))
                 {
-                $ck_styles_template_dir=$pagetpl;
+                $ck_styles_template_dir = $pagetpl;
                 }
             elseif (file_exists(WB_PATH . '/templates/' . $pagetpl . '/css/editor.styles.js'))
                 {
-                $ck_styles_template_dir=$pagetpl;
+                $ck_styles_template_dir = $pagetpl . '/js';
+                }
+            else
+                {
+                $ck_styles_template_dir = "none";
                 }
             }
-        }
-    else
-        {
-        $ck_styles_template_dir = WB_PATH . "/modules/ckeditor/wb_config/editor.styles.js";
         }
     return $ck_styles_template_dir;
     }
@@ -143,7 +143,7 @@ function show_wysiwyg_editor($name, $id, $content, $width, $height)
     if ($css_template_name == "none")
         {
         // no editor.css file exists in default template folder, or template folder of current page
-        $css_file = WB_URL . '/modules/ckeditor/wb_config/contents.css';
+        $css_file = WB_URL . '/modules/ckeditor/wb_config/editor.css';
         }
     else
         {
@@ -152,7 +152,7 @@ function show_wysiwyg_editor($name, $id, $content, $width, $height)
         }
     // obtain template name of current page for editor.styles.js (if empty, no editor.styles.js files exists)
     $styles_template_name = get_styles_template_name();
-    // There seems to be some big problem with either $css_file and $styles_url when no .js / .css is in the      // template. Everything works fine when there is some... More and more I think a class would be better.
+    
     $ckeditor->config['contentsCss'] = $css_file;
 
     if ($styles_template_name == "none")
@@ -165,8 +165,9 @@ function show_wysiwyg_editor($name, $id, $content, $width, $height)
         // editor.styles.js file exists in default template folder or template folder of current page
         $styles_url = WB_URL . '/templates/' . $styles_template_name . '/editor.styles.js';
         }
+    
     // The Styles dropdown in the editor. The styles_set needs to be set in each editor.styles.js!
-    $styles_set                           = "wb";
+    $styles_set                           = 'wb';
     $styles_file                          = $styles_set . ':' . $styles_url;
     $ckeditor->config['stylesSet']        = $styles_file;
     
