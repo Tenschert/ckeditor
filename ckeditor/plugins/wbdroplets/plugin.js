@@ -11,7 +11,6 @@
 CKEDITOR.plugins.add('WBDroplets',
 {
     lang : ['en','de','nl'],
-    requires: ['iframedialog'],
     init: function(editor)
     {
         var pluginName = 'WBDroplets';
@@ -22,6 +21,6 @@ CKEDITOR.plugins.add('WBDroplets',
                 command: 'WBDropletsDlg',
                 icon: this.path + 'images/wbdroplets.gif'
             });
-        CKEDITOR.dialog.add('WBDropletsDlg', this.path + 'dialogs/wbdroplets.js');
+        CKEDITOR.dialog.add('WBDropletsDlg', this.path + 'dialogs/wbdroplets.php');
     }
 });

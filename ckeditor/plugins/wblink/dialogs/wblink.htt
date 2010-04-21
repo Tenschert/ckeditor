@@ -5,7 +5,6 @@
 		<title>{WBModulesDlgTitle}</title>
 		<meta http-equiv="Content-Type" content="text/html; charset={CHARSET}">
 		<meta content="noindex, nofollow" name="robots">
-	    <link href="css/wbmodules.css" rel="stylesheet" type="text/css" />
 	</head>
 
 	<body scroll="no" style="overflow:hidden;">
