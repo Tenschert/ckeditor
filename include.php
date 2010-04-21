@@ -167,16 +167,27 @@ function show_wysiwyg_editor($name, $id, $content, $width, $height)
         }
     
     // The Styles dropdown in the editor. The styles_set needs to be set in each editor.styles.js!
-    $styles_set                           = 'wb';
-    $styles_file                          = $styles_set . ':' . $styles_url;
-    $ckeditor->config['stylesSet']        = $styles_file;
+    $styles_set                                 = 'wb';
+    $styles_file                                = $styles_set . ':' . $styles_url;
+    $ckeditor->config['stylesSet']              = $styles_file;
     
     // The Templates list ("presets" like two columns with a picture) in the editor.
     // The templates definition set to use. It accepts a comma separated list.
-    $ckeditor->config['templates']        = 'default';
+    $ckeditor->config['templates']              = 'default';
     // The list of templates definition files to load. 
     $ck_templates_files[] = WB_URL.'/modules/ckeditor/wb_config/editor.templates.js';
-    $ckeditor->config['templates_files']  = $ck_templates_files;
+    $ckeditor->config['templates_files']        = $ck_templates_files;
+    
+    // The filebrowser are called in the include, because later on we can make switches, use WB_URL and so on
+    $connectorPath = $ckeditor->basePath.'filemanager/connectors/php/connector.php';
+    $ckeditor->config['filebrowserBrowseUrl']       = $ckeditor->basePath.'filemanager/browser/default/browser.html?Connector='.$connectorPath;
+    $ckeditor->config['filebrowserImageBrowseUrl']  = $ckeditor->basePath.'filemanager/browser/default/browser.html?Type=Image&Connector='.$connectorPath;
+    $ckeditor->config['filebrowserFlashBrowseUrl']  = $ckeditor->basePath.'filemanager/browser/default/browser.html?Type=Flash&Connector='.$connectorPath;
+    // The Uploader has to be called, too.
+    $uploadPath = $ckeditor->basePath.'filemanager/connectors/php/upload.php?Type=';
+    $ckeditor->config['filebrowserUploadUrl']       = $uploadPath.'File';
+    $ckeditor->config['filebrowserImageUploadUrl']  = $uploadPath.'Image';
+    $ckeditor->config['filebrowserFlashUploadUrl']       = $uploadPath.'Flash';
     
     $ckeditor->editor($name, reverse_htmlentities($content));
 }

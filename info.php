@@ -12,7 +12,7 @@
 $module_directory   = 'ckeditor';
 $module_name        = 'CKEditor';
 $module_function    = 'WYSIWYG';
-$module_version     = '0.1.6';
+$module_version     = '0.2.0';
 $module_platform    = '2.8';
 $module_author      = 'WebsiteBaker Project, Michael Tenschert';
 $module_home        = 'http://www.websitebaker2.org';

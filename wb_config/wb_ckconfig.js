@@ -80,10 +80,10 @@ CKEDITOR.editorConfig = function( config )
 
     // ---------- Filebrowser ----------
     
-    config.filebrowserBrowseUrl = '../../admin/media/browse.php';
-    config.filebrowserUploadUrl = '../../admin/media/upload.php';
-    config.filebrowserWindowWidth   = '800';
-    config.filebrowserWindowHeight  = '500';
+    //config.filebrowserBrowseUrl = '../../admin/media/browse.php';
+    //config.filebrowserUploadUrl = '../../admin/media/upload.php';
+    //config.filebrowserWindowWidth   = '800';
+    //config.filebrowserWindowHeight  = '500';
     
     // Protect PHP code tags (<?...?>) so CKEditor will not break them when switching from Source to WYSIWYG.
     // Uncommenting this line doesn't mean the user will not be able to type PHP code in the source. This         // kind of prevention must be done in the server side, so just leave this line as is.
