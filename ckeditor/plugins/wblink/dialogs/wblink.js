@@ -19,18 +19,15 @@ CKEDITOR.dialog.add( 'WBLinkDlg', function( editor ) {
                 title: 'Tab1',
                 elements : [{
                         type: 'iframe',
-                        src : 'http://localhost/web/wbtemp/modules/ckeditor/ckeditor/plugins/wbmodules/dialogs/wbmodules.php',
+                        src : 'http://localhost/web/wbtemp/modules/ckeditor/ckeditor/plugins/wblink/dialogs/wblink.php',
                         width : '100%',
                         height : '100%',
                         onContentLoad : function() {
-                            var iframe = document.getElementById( this._.frameId );
-                            iframeWindow = iframe.contentWindow;
                         }
                     },] 
             }
             ],
          onOk: function() {
-             this._.editor.insertHtml(iframeWindow.getElementById('test').value);
          },
          resizable: 3
     };

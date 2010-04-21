@@ -33,9 +33,3 @@
 	opacity: 0.8;
 	filter:alpha(opacity=80);
 }
-
-.mceActionPanel {
-  top: 200px;
-  position:  fixed;
-  width: 95%;
-}
