@@ -19,7 +19,7 @@ CKEDITOR.dialog.add( 'WBLinkDlg', function( editor ) {
                 title: 'Tab1',
                 elements : [{
                         type: 'iframe',
-                        src : 'http://localhost/web/wbtemp/modules/ckeditor/ckeditor/plugins/wblink/dialogs/wblink.php',
+                        src : '../../modules/ckeditor/ckeditor/plugins/wblink/dialogs/wblink.php',
                         width : '100%',
                         height : '100%',
                         onContentLoad : function() {
