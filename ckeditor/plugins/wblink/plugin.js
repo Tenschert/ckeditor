@@ -22,6 +22,6 @@ CKEDITOR.plugins.add('wblink',
                 command: 'WBLinkDlg',
                 icon: this.path + 'images/wblink.gif'
             });
-        CKEDITOR.dialog.add('WBLinkDlg', this.path + 'dialogs/wblink.js');
+        CKEDITOR.dialog.add('WBLinkDlg', this.path + 'dialogs/wblink.php');
     }
 });

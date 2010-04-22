@@ -9,6 +9,13 @@
  * @license         http://www.gnu.org/licenses/lgpl.html
  */
 
+$debug = true;
+
+if (true === $debug) {
+	ini_set('display_errors', 1);
+	error_reporting(E_ALL);
+}
+
 // Include the config file
 require('../../../../../../config.php');
 
@@ -16,75 +23,97 @@ require('../../../../../../config.php');
 require(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages_modify', false);
 
-// Setup the template
-$template = new Template(WB_PATH.'/modules/ckeditor/ckeditor/plugins/wblink/dialogs/');
-$template->set_file('page', 'wblink.htt');
-$template->set_block('page', 'main_block', 'main');
+$list = "[";
 
 // Function to generate page list
 function gen_page_list($parent) {
-	global $template, $database, $admin;
-	$get_pages = $database->query("SELECT * FROM ".TABLE_PREFIX."pages WHERE parent = '$parent'");
+	global $database, $admin, $list;
+	
+	$get_pages = $database->query("SELECT * FROM ".TABLE_PREFIX."pages WHERE parent = '$parent' order by position");
+	
 	while($page = $get_pages->fetchRow()) {
 		// method page_is_visible was introduced with WB 2.7
 		if(method_exists($admin, 'page_is_visible') && !$admin->page_is_visible($page))
 			continue;
+			
 		$title = stripslashes($page['menu_title']);
 		// Add leading -'s so we can tell what level a page is at
 		$leading_dashes = '';
 		for($i = 0; $i < $page['level']; $i++) {
 			$leading_dashes .= '- ';
 		}
-		$template->set_var('TITLE', $leading_dashes.' '.$title);
-		$template->set_var('LINK', '[wblink'.$page['page_id'].']');
-
-
-		/**
-			Note:
-			WB charset defined in the template: wbmodules.html will be overwritten
-			Routine kept for now, maybe it is possible to define custom plugin charsets in a future FCK releases (doc)
-		*/
-		// work out the specified WB charset 
-		if(defined('DEFAULT_CHARSET')) { 
-			$template->set_var('CHARSET', DEFAULT_CHARSET);
-		} else {
-			$template->set_var('CHARSET', 'utf-8');
-		}
-		$template->parse('page_list', 'page_list_block', true);
+	
+		$list .= "[ '".$leading_dashes." ".$title."','[wblink".$page['page_id']."]'],";
+		
 		gen_page_list($page['page_id']);
 	}
 }
 
-// Get pages and put them into the pages list
-$template->set_block('main_block', 'page_list_block', 'page_list');
 $database = new database();
-$get_pages = $database->query("SELECT * FROM ".TABLE_PREFIX."pages WHERE parent = '0'");
+$get_pages = $database->query("SELECT * FROM ".TABLE_PREFIX."pages WHERE parent = '0' order by position");
+
 if($get_pages->numRows() > 0) {
 	// Loop through pages
 	while($page = $get_pages->fetchRow()) {
-		// method page_is_visible was introduced with WB 2.7
+		
 		if(method_exists($admin, 'page_is_visible') && !$admin->page_is_visible($page))
 			continue;
+		
 		$title = stripslashes($page['menu_title']);
-		$template->set_var('TITLE', $title);
-		$template->set_var('LINK', '[wblink'.$page['page_id'].']');
-		$template->parse('page_list', 'page_list_block', true);
+		$list .= "[ '".$title."','[wblink".$page['page_id']."]'],";
+		
 		gen_page_list($page['page_id']);
 	}
+	$list = substr($list, 0, -1);
+	
 } else {
-	$template->set_var('TITLE', 'None found');
-	$template->set_var('LINK', 'None found');
-	$template->parse('page_list', 'page_list_block', false);
+	/**
+	 *	None found
+	 *
+	 */
+	 $list .= "['non found', 'none']";
 }
-	$template->set_var(array(
-            'WBModulesDlgTitle' => "Title",
-            'WBModuleslblInsert' => "Insert",
-            'WBModuleslblCancel' => "Cancel",
-            'WBModuleslblPageSelection' => "Select page",
-         ) );
 
-// Parse the template object
-$template->parse('main', 'main_block', false);
-$template->pparse('output', 'page');
+$list .= "]";
 
 ?>
+CKEDITOR.dialog.add( 'WBLinkDlg', function( editor ) {
+    return { 
+        title: 'WB Link - Insert WebsiteBaker Link',
+        minWidth: 280,
+        minHeight: 80,
+        contents: [ 
+            {
+                id: 'tab1',
+                label: 'Tab1',
+                title: 'Tab1',
+                elements : [{
+                        id: 'wblinks',
+                        type: 'select',
+                        label: "Links",
+                        labelLayout:'horizontal',
+						widths:['20%','80%'],
+						style: 'width: 150px; margin-left: 10px; margin-top:-3px;',
+                        validate : function() {},
+                        items: <?php echo $list; ?>
+                    }] 
+            }
+            ],
+         onOk: function() {
+         	
+         	/**
+         	 *	Getting the value of out droplet-select
+         	 *
+         	 */
+         	var wb_link = this.getContentElement("tab1", "wblinks").getInputElement().getValue();
+         	
+         	if (wb_link != "none") {
+				editor = this.getParentEditor();
+				editor.fire('paste', { 'text' : wb_link } );
+			}
+			
+			return true;
+         },
+         resizable: 3
+    };
+} );
