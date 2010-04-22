@@ -8,12 +8,11 @@
  */
 
 // Register the related commands.
-CKEDITOR.plugins.add('WBDroplets',
+CKEDITOR.plugins.add('wbdroplets',
 {
     lang : ['en','de','nl'],
     init: function(editor)
     {
-        var pluginName = 'WBDroplets';
         editor.addCommand('WBDropletsDlg', new CKEDITOR.dialogCommand('WBDropletsDlg'));
         editor.ui.addButton('WBDroplets',
             {

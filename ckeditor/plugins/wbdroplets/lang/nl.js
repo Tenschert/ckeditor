@@ -1,4 +1,4 @@
-CKEDITOR.plugins.setLang( 'WBDroplets', 'nl',
+CKEDITOR.plugins.setLang( 'wbdroplets', 'nl',
 {
     wbdroplets :
     {

@@ -1,4 +1,4 @@
-CKEDITOR.plugins.setLang( 'WBLink', 'en',
+CKEDITOR.plugins.setLang( 'wblink', 'en',
 {
     wblink :
     {

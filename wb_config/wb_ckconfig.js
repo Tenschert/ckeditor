@@ -37,7 +37,7 @@ CKEDITOR.editorConfig = function( config )
     
     config.templates_replaceContent =   true;
     // Define all extra CKEditor plugins in _yourwb_/modules/ckeditor/ckeditor/plugins here
-    config.extraPlugins             = 'WBDroplets,WBLink,uicolor';
+    config.extraPlugins             = 'wbdroplets,wblink,uicolor';
     
     // Different Toolbars. Remove, add or move 'SomeButton', with the quotes and following comma 
     config.toolbar_Full     = [['Source','-','Save','NewPage','Preview','-','Templates'],['Cut','Copy','Paste','PasteText','PasteFromWord','-','Print','SpellChecker','Scayt'],['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],['Form','Checkbox','Radio','TextField','Textarea','Select','Button','ImageButton','HiddenField'],['Maximize','ShowBlocks','-','UIColor','About'],'/',['Bold','Italic','Underline','Strike','-','Subscript','Superscript'],['NumberedList','BulletedList','-','Outdent','Indent','Blockquote','CreateDiv'],['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],['WBDroplets','WBLink','Link','Unlink','Anchor'],['Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],'/',['Styles','Format','Font','FontSize'],['TextColor','BGColor']];

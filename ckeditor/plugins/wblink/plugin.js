@@ -8,13 +8,13 @@
  */
 
 // Register the related commands.
-CKEDITOR.plugins.add('WBLink',
+CKEDITOR.plugins.add('wblink',
 {
     lang : ['en','de','nl','ru'],
     requires: ['iframedialog'],
     init: function(editor)
     {
-        var pluginName = 'WBLink';
+        var pluginName = 'wblink';
         editor.addCommand('WBLinkDlg', new CKEDITOR.dialogCommand('WBLinkDlg'));
         editor.ui.addButton('WBLink',
             {
