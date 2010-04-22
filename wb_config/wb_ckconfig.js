@@ -63,6 +63,7 @@ CKEDITOR.editorConfig = function( config )
     
     // The skin to load. It may be the name of the skin folder inside the editor installation path,  
     // or the name and the path separated by a comma. 
+    // Available skins: kama (default), office2003, office2007
     config.skin             = 'kama';
     
     // The standard height and width of CKEditor in pixels.
