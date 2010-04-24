@@ -13,13 +13,13 @@ CKEDITOR.plugins.add('wbdroplets',
     lang : ['en','de','nl'],
     init: function(editor)
     {
-        editor.addCommand('WBDropletsDlg', new CKEDITOR.dialogCommand('WBDropletsDlg'));
-        editor.ui.addButton('WBDroplets',
+        editor.addCommand('wbdropletsDlg', new CKEDITOR.dialogCommand('wbdropletsDlg'));
+        editor.ui.addButton('wbdroplets',
             {
                 label: editor.lang.wbdroplets.btn,
-                command: 'WBDropletsDlg',
+                command: 'wbdropletsDlg',
                 icon: this.path + 'images/wbdroplets.gif'
             });
-        CKEDITOR.dialog.add('WBDropletsDlg', this.path + 'dialogs/wbdroplets.php');
+        CKEDITOR.dialog.add('wbdropletsDlg', this.path + 'dialogs/wbdroplets.php');
     }
 });

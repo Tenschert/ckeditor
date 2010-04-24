@@ -9,6 +9,8 @@
  * @license         http://www.gnu.org/licenses/lgpl.html
  */
 
+global $database;
+
 $debug = true;
 
 if (true === $debug) {
@@ -36,20 +38,19 @@ function gen_page_list($parent) {
 		if(method_exists($admin, 'page_is_visible') && !$admin->page_is_visible($page))
 			continue;
 			
-		$title = stripslashes($page['menu_title']);
+		$title = str_replace("\"", "&quote;", $page['menu_title']);
 		// Add leading -'s so we can tell what level a page is at
 		$leading_dashes = '';
 		for($i = 0; $i < $page['level']; $i++) {
 			$leading_dashes .= '- ';
 		}
 	
-		$list .= "[ '".$leading_dashes." ".$title."','[wblink".$page['page_id']."]'],";
+		$list .= "[ \"".$leading_dashes." ".$title."\",'[wblink".$page['page_id']."]'],";
 		
 		gen_page_list($page['page_id']);
 	}
 }
 
-$database = new database();
 $get_pages = $database->query("SELECT * FROM ".TABLE_PREFIX."pages WHERE parent = '0' order by position");
 
 if($get_pages->numRows() > 0) {
@@ -77,7 +78,7 @@ if($get_pages->numRows() > 0) {
 $list .= "]";
 
 ?>
-CKEDITOR.dialog.add( 'WBLinkDlg', function( editor ) {
+CKEDITOR.dialog.add( 'wblinkDlg', function( editor ) {
     return { 
         title: 'WB Link - Insert WebsiteBaker Link',
         minWidth: 280,
@@ -90,26 +91,74 @@ CKEDITOR.dialog.add( 'WBLinkDlg', function( editor ) {
                 elements : [{
                         id: 'wblinks',
                         type: 'select',
-                        label: "Links",
+                        label: "WB Page",
                         labelLayout:'horizontal',
 						widths:['20%','80%'],
 						style: 'width: 150px; margin-left: 10px; margin-top:-3px;',
                         validate : function() {},
                         items: <?php echo $list; ?>
-                    }] 
+                    }, {
+                    	id: 'wblinkclass',
+                    	type: 'text',
+                    	label: 'Class',
+                    	labelLayout:'horizontal',
+						widths:['50%','50%'],
+						style: 'width: 150px; margin-left: 10px, padding-left: 30px;',
+						validate: function() {}
+                    } /*, {
+                    	id: 'wblinkusepagename',
+                    	type: 'checkbox',
+                    	label: 'use Pagetitle',
+						labelLayout:'horizontal',
+						widths:['50%','50%'],
+                    	validate: function() {}
+                    
+                    }*/] 
             }
             ],
          onOk: function() {
          	
          	/**
-         	 *	Getting the value of out droplet-select
+         	 *	Getting the value of our page-select
          	 *
          	 */
-         	var wb_link = this.getContentElement("tab1", "wblinks").getInputElement().getValue();
-         	
+         	var ref = this.getContentElement("tab1", "wblinks").getInputElement();
+         	var wb_link = ref.getValue();
+         	var wb_link_index = ref.getIndex();
+			
+			var class_name = this.getContentElement("tab1", "wblinkclass").getInputElement().getValue();
+			if (class_name.length > 0 ) class_name = " class='"+class_name+"' ";
+					
          	if (wb_link != "none") {
 				editor = this.getParentEditor();
-				editor.fire('paste', { 'text' : wb_link } );
+				
+				var selection = editor.getSelection();
+				var	ranges = selection.getRanges();
+				
+				if ( ranges.length == 1 && ranges[0].collapsed ) {
+					
+					/**
+					 *	Nothing selected ... so we simple append a link
+					 *
+					 */
+					wb_link = "<a href='"+wb_link+"' "+ class_name + ">"+wb_link+"</a>";
+
+				} else {
+					
+					var c_ref = ranges[0].cloneContents(); // **!!
+					var text = c_ref.$.textContent;
+					
+					wb_link = "<a href='"+wb_link+"' "+ class_name + ">"+text+"</a>";
+										
+					selection.selectRanges( ranges );
+					
+				}
+				
+				setTimeout( function() {
+						editor.fire( 'paste', { 'html': wb_link } );
+					}, 
+					0
+				);
 			}
 			
 			return true;

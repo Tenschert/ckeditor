@@ -15,13 +15,13 @@ CKEDITOR.plugins.add('wblink',
     init: function(editor)
     {
         var pluginName = 'wblink';
-        editor.addCommand('WBLinkDlg', new CKEDITOR.dialogCommand('WBLinkDlg'));
-        editor.ui.addButton('WBLink',
+        editor.addCommand('wblinkDlg', new CKEDITOR.dialogCommand('wblinkDlg'));
+        editor.ui.addButton('wblink',
             {
                 label: editor.lang.wblink.btn,
-                command: 'WBLinkDlg',
+                command: 'wblinkDlg',
                 icon: this.path + 'images/wblink.gif'
             });
-        CKEDITOR.dialog.add('WBLinkDlg', this.path + 'dialogs/wblink.php');
+        CKEDITOR.dialog.add('wblinkDlg', this.path + 'dialogs/wblink.php');
     }
 });

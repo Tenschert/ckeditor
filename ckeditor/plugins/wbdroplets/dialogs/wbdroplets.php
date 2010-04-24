@@ -44,7 +44,7 @@ $list .= "]";
 $desc_list .= "\n";
 
 ?>
-CKEDITOR.dialog.add( 'WBDropletsDlg', function( editor ) {
+CKEDITOR.dialog.add( 'wbdropletsDlg', function( editor ) {
     return { 
         title: editor.lang.wbdroplets.name,
         minWidth: 280,
