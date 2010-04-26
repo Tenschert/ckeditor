@@ -185,7 +185,31 @@ CKEDITOR.dialog.add( 'wblinkDlg', function( editor ) {
 					if (use_title == false) {
 						var c_ref = ranges[0].cloneContents(); // **!!
 						var text = c_ref.$.textContent;
-					
+						
+						if (text == "") {
+							/**
+							 *	Image?
+							 */
+							var s = c_ref.$.firstChild['src'];
+							if (s) {
+								var height = c_ref.$.firstChild['height'];
+								var width = c_ref.$.firstChild['width'];
+								var class = c_ref.$.firstChild['className'];
+								var id = c_ref.$.firstChild['id'];
+								var title = c_ref.$.firstChild['title'];
+								
+								text = "<img src='" + s + "' ";
+								
+								if (false == isNaN(height)) text += " height='"+height+"'";
+								if (false == isNaN(width)) text += " width='"+width+"'";
+								
+								// text += "style='border-width: 0px;'";
+								
+								text += " />";
+							}
+						}
+						// for(var i in c_ref.$.firstChild) text += i+"== "+c_ref.$.firstChild[i]+"<br />\n\n";
+						
 						wb_link = "<a href='"+wb_link+"' "+ class_name + ">"+text+"</a>";
 										
 						selection.selectRanges( ranges );
