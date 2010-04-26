@@ -8,6 +8,6 @@ CKEDITOR.plugins.setLang( 'wblink', 'de',
         errselection :      'Bitte zuerst einen Text markieren, der verlinkt werden soll!',
         errpageselect :     'Bitte eine WB-Seite markieren, auf die verlinkt werden soll!',
         lblpageselection :  'Auswahlfenster der möglichen WB-Seiten:',
-        lbltitle :          'Linktitel:',
+        lbltitle :          'Linktitel:'
     }
 })

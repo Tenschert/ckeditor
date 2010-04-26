@@ -8,6 +8,6 @@ CKEDITOR.plugins.setLang( 'wblink', 'ru',
         errselection :      'Пожалуйста выделите ссылающийся текст',
         errpageselect :     'Выберите страницу чтобы сделать ссылку',
         lblpageselection :  'Выберите страницу для ссылки:',
-        lbltitle :          'Заголовок',
+        lbltitle :          'Заголовок'
     }
 })

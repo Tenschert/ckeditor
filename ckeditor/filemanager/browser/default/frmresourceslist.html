@@ -27,6 +27,7 @@
 	<link href="browser.css" type="text/css" rel="stylesheet">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<script type="text/javascript" src="js/common.js"></script>
+	
 	<script type="text/javascript">
 
 var oListManager = new Object() ;
@@ -47,45 +48,44 @@ oListManager.GetFolderRowHtml = function( folderName, folderPath )
 {
 	// Build the link to view the folder.
 	var sLink = '<a href="#" onclick="OpenFolder(\'' + ProtectPath( folderPath ) + '\');return false;">' ;
-
-	return '<tr>' +
-			'<td width="16">' +
-				sLink +
-				'<img alt="" src="images/Folder.gif" width="16" height="16" border="0"><\/a>' +
-			'<\/td><td nowrap colspan="2">&nbsp;' +
-				sLink +
-				folderName +
-				'<\/a>' +
-		'<\/td><\/tr>' ;
+	
+	return 	'<div class="file" title="'+ folderName +'">' +			
+			'<div>' + sLink +
+			'<img class="icon" alt="" src="images/folder_big.gif" border="0" width="48" height="48" ><\/a>' +
+			'<\/div>' +
+            '<br /><div class="filename">'+ sLink + folderName +'<\/a>' + '<\/div>' +
+            '<\/div>';
 }
 
-oListManager.GetFileRowHtml = function( fileName, fileUrl, fileSize )
-{
+oListManager.GetFileRowHtml = function( fileName, fileUrl, fileSize ){
+
 	// Build the link to view the folder.
 	var sLink = '<a href="#" onclick="OpenFile(\'' + ProtectPath( fileUrl ) + '\');return false;">' ;
-	var relLink = '<a href="'+fileUrl+'" rel="lightbox">' ;
+	var relLink = '<a href="'+ fileUrl +'" rel="lightbox">' ;
 
 	// Get the file icon.
-	var sIcon = oIcons.GetIcon( fileName ) ;
+	var sIcon = oIcons.GetIcon( fileName ) ;	
+	
+	/**
+	 *	Get file extension and decide if thumb or icon should be displayed
+	 */
 
-	return '<tr>' +
-			'<td class="icon">' +
-				sLink +
-				'<img alt="" src="images/icons/' + sIcon + '.gif" width="16" height="16" border="0"><\/a>' +
-			'<\/td>'+
-			'<td class="thumbnail">' +
-				sLink +
-				'<img alt="" src="' + fileUrl + '" width="100"><\/a>' +
-			'<\/td>' +
-            '<td class="filename">' +
-				sLink +
-				fileName +
-				'<\/a>' +
-			'<\/td>'+
-            '<td align="right" nowrap>&nbsp;' +
-				fileSize +
-				' KB' +
-		'<\/td><\/tr>' ;
+		if( sIcon == 'gif' || sIcon == 'jpg' || sIcon == 'jpeg' || sIcon == 'png' ){
+			var imgTag = '<img class="thumb" alt="" src="' + fileUrl + '" />' ;
+		}
+		else {
+			var imgTag = '<img class="icon" alt="" src="images/icons/' + sIcon + '.gif" />';
+		}
+
+			return '<div class="file" title="'+ fileName +'">' +
+			'<span class="fSize">' +
+			'<nobr><img alt="' + sIcon + '" title="' + sIcon + '" src="images/icons/' + sIcon + '.gif" width="16" height="16" border="0"> ' 
+			+ fileSize + 
+			' kB</nobr><\/span>' +
+			'<div class="thumbnail">' + sLink + imgTag +'<\/a>' +
+			'<\/div>' +
+            '<br /><div class="filename"><nobr>' + sLink + fileName +	'<\/a>' + '</nobr><\/div>' +
+            '<\/div>' ;
 }
 
 function OpenFolder( folderPath )
@@ -101,8 +101,6 @@ function OpenFile( fileUrl )
  
     funcNum = GetUrlParam('CKEditorFuncNum') ;
     window.top.opener.CKEDITOR.tools.callFunction( funcNum, encodeURI( fileUrl ).replace( '#', '%23' ));
- 
-    ///////////////////////////////////
     window.top.close() ;
     window.top.opener.focus() ;
 }
@@ -137,7 +135,7 @@ function GetFoldersAndFilesCallBack( fckXml )
 
 //	var dTimer = new Date() ;
 
-	var oHtml = new StringBuilder( '<table id="tableFiles" cellspacing="1" cellpadding="0" width="100%" border="0">' ) ;
+	var oHtml = new StringBuilder( '<div id="tableFiles"><div>' ) ;
 
 	// Add the Folders.
 	var oNodes ;
@@ -167,7 +165,7 @@ function GetFoldersAndFilesCallBack( fckXml )
 		}
 	}
 
-	oHtml.Append( '<\/table>' ) ;
+	oHtml.Append( '<\/div><\/div>' ) ;
 
 	document.body.innerHTML = oHtml.ToString() ;
 

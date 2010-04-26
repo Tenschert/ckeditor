@@ -7,6 +7,6 @@ CKEDITOR.plugins.setLang( 'wbdroplets', 'nl',
         name :               'WebsiteBaker droplet toevoegen',
         errpageselect :      'Eerst een droplet selecteren',
         lblpageselection :   'Selecteer een droplet:',
-        lbltitle :           'Titel',
+        lbltitle :           'Titel'
     }
 })

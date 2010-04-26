@@ -129,5 +129,4 @@ function show_wysiwyg_editor($name, $id, $content, $width = '100%', $height = '3
     $ckeditor->editor($name, reverse_htmlentities($content));
 
 }
-
 ?>

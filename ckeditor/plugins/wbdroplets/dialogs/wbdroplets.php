@@ -7,6 +7,8 @@
  * @copyright       2010, Michael Tenschert
  * @link            http://www.websitebaker2.org/
  * @license         http://www.gnu.org/licenses/lgpl.html
+ * @version			0.3.0
+ *
  */
 
 // Include the config file
@@ -15,6 +17,24 @@ require('../../../../../../config.php');
 // Create new admin object
 require(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages_modify', false);
+
+/**
+ *	JavaScript handels LF/LB in another way as PHP, even inside an array.
+ *	So we're in the need of pre-parse the entries.
+ *	
+ */
+if (!function_exists('wbdroplet_clean_str')) {
+	function wbdroplet_clean_str( &$aStr) {
+		$vars = array(
+			'"' => "\\\"",
+			'\'' => "",
+			"\n" => "<br />",
+			"\r" => ""
+		);
+		
+		return str_replace( array_keys($vars), array_values($vars), $aStr);
+	}
+}
 
 global $database;
 $get_droplet = $database->query("SELECT * FROM `".TABLE_PREFIX."mod_droplets` where `active`=1 ORDER BY `name`");
@@ -30,12 +50,12 @@ if($get_droplet->numRows() > 0) {
 	 */
 	while($droplet = $get_droplet->fetchRow()) {
 		
-		$title	= stripslashes($droplet['name']);
-		$desc	= stripslashes($droplet['description']);
-		$comm	= stripslashes($droplet['comments']);
+		$title	= wbdroplet_clean_str( $droplet['name'] );
+		$desc	= wbdroplet_clean_str( $droplet['description'] );
+		$comm	= wbdroplet_clean_str( $droplet['comments'] );
 		
-		$list .= "\n['".$title."', '[[".$title."]]'],";
-		$desc_list .= "info['[[".$title."]]']='".trim($desc)."<br /><br />".trim($comm)."';"; 
+		$list .= "\n[\"".$title."\", \"[[".$title."]]\"],";
+		$desc_list .= "\ninfo[\"[[".$title."]]\"]=\"".trim($desc)."<br /><br />".trim($comm)."\";"; 
 		
 	}
 	$list = substr( $list, 0, -1 );
@@ -88,6 +108,7 @@ CKEDITOR.dialog.add( 'wbdropletsDlg', function( editor ) {
                     			"padding-left: 10px; " +
                     			"width: 250px !important; " +
                     			"height: 100px;" +
+                    			"overflow: auto;" +
                     			"white-space: normal !important;",
                     	html: "<div id='droplet_info'>Hello</div>"
                     } ] 

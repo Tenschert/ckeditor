@@ -26,42 +26,44 @@ require(WB_PATH.'/framework/class.admin.php');
 $admin = new admin('Pages', 'pages_modify', false);
 
 $list = "[";
+$page_titles = "var wblink_titles = new Array(); ";
 
 // Function to generate page list
 function gen_page_list($parent) {
-	global $database, $admin, $list;
+	global $database, $admin, $list, $page_titles;
 	
-	$get_pages = $database->query("SELECT * FROM ".TABLE_PREFIX."pages WHERE parent = '$parent' order by position");
+	$get_pages = $database->query("SELECT * FROM `".TABLE_PREFIX."pages` WHERE `parent`= '".$parent."' order by `position`");
 	
-	while($page = $get_pages->fetchRow()) {
-		// method page_is_visible was introduced with WB 2.7
+	while( !false == ($page = $get_pages->fetchRow() ) ) {
+		
 		if(method_exists($admin, 'page_is_visible') && !$admin->page_is_visible($page))
 			continue;
 			
-		$title = str_replace("\"", "&quote;", $page['menu_title']);
+		$title = mysql_real_escape_string( $page['menu_title'] );
+		
 		// Add leading -'s so we can tell what level a page is at
 		$leading_dashes = '';
-		for($i = 0; $i < $page['level']; $i++) {
-			$leading_dashes .= '- ';
-		}
-	
+		for($i = 0; $i < $page['level']; $i++) $leading_dashes .= '- ';
+		
 		$list .= "[ \"".$leading_dashes." ".$title."\",'[wblink".$page['page_id']."]'],";
+		$page_titles .= " wblink_titles['[wblink".$page['page_id']."]']='".$title."';";
 		
 		gen_page_list($page['page_id']);
 	}
 }
 
-$get_pages = $database->query("SELECT * FROM ".TABLE_PREFIX."pages WHERE parent = '0' order by position");
+$get_pages = $database->query("SELECT * FROM `".TABLE_PREFIX."pages` WHERE `parent`= '0' order by `position`");
 
 if($get_pages->numRows() > 0) {
 	// Loop through pages
-	while($page = $get_pages->fetchRow()) {
+	while(!false == ($page = $get_pages->fetchRow() ) ) {
 		
 		if(method_exists($admin, 'page_is_visible') && !$admin->page_is_visible($page))
 			continue;
 		
 		$title = stripslashes($page['menu_title']);
 		$list .= "[ '".$title."','[wblink".$page['page_id']."]'],";
+		$page_titles .= " wblink_titles['[wblink".$page['page_id']."]']='".$title."';";
 		
 		gen_page_list($page['page_id']);
 	}
@@ -76,6 +78,7 @@ if($get_pages->numRows() > 0) {
 }
 
 $list .= "]";
+$page_titles .= "";
 
 ?>
 CKEDITOR.dialog.add( 'wblinkDlg', function( editor ) {
@@ -105,15 +108,21 @@ CKEDITOR.dialog.add( 'wblinkDlg', function( editor ) {
 						widths:['50%','50%'],
 						style: 'width: 150px; margin-left: 10px, padding-left: 30px;',
 						validate: function() {}
-                    } /*, {
+                    }, {
                     	id: 'wblinkusepagename',
                     	type: 'checkbox',
                     	label: 'use Pagetitle',
 						labelLayout:'horizontal',
 						widths:['50%','50%'],
+						value: 1,
                     	validate: function() {}
                     
-                    }*/] 
+                    }, { 
+                    	id: 'wblinkhiddenhtml',
+                    	type: 'html',
+                    	style: 'display: hidden',
+                    	html: "<script><?php echo $page_titles; ?></script>"
+                    } ] 
             }
             ],
          onOk: function() {
@@ -124,11 +133,10 @@ CKEDITOR.dialog.add( 'wblinkDlg', function( editor ) {
          	 */
          	var ref = this.getContentElement("tab1", "wblinks").getInputElement();
          	var wb_link = ref.getValue();
-         	var wb_link_index = ref.getIndex();
-			
-			var class_name = this.getContentElement("tab1", "wblinkclass").getInputElement().getValue();
+         	
+         	var class_name = this.getContentElement("tab1", "wblinkclass").getInputElement().getValue();
 			if (class_name.length > 0 ) class_name = " class='"+class_name+"' ";
-					
+				
          	if (wb_link != "none") {
 				editor = this.getParentEditor();
 				
@@ -137,11 +145,30 @@ CKEDITOR.dialog.add( 'wblinkDlg', function( editor ) {
 				
 				if ( ranges.length == 1 && ranges[0].collapsed ) {
 					
-					/**
+					/**	***********************************************
 					 *	Nothing selected ... so we simple append a link
 					 *
 					 */
-					wb_link = "<a href='"+wb_link+"' "+ class_name + ">"+wb_link+"</a>";
+					
+					/**
+					 *	Should we use the selected page-title instead of "[[wblinkxxx]]"?
+					 *
+					 */
+					var link_text = wb_link;
+					
+					var ref_c = this.getContentElement("tab1", "wblinkusepagename").getInputElement();
+					if (ref_c) {
+						if (ref_c.$.checked == true) {
+							/**
+							 *	In the hidden ui-element "wblinkhiddenhtml"
+							 *	the array "wblink_titles" is defined.
+							 *
+							 */
+							if (wblink_titles) link_text = wblink_titles[wb_link];
+						}
+					}
+							
+					wb_link = "<a href='"+wb_link+"' "+ class_name + ">"+link_text+"</a>";
 
 				} else {
 					
