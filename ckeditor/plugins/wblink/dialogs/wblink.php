@@ -192,23 +192,21 @@ CKEDITOR.dialog.add( 'wblinkDlg', function( editor ) {
 							 */
 							var s = c_ref.$.firstChild['src'];
 							if (s) {
-								var height = c_ref.$.firstChild['height'];
-								var width = c_ref.$.firstChild['width'];
-								var class = c_ref.$.firstChild['className'];
-								var id = c_ref.$.firstChild['id'];
-								var title = c_ref.$.firstChild['title'];
-								
+
 								text = "<img src='" + s + "' ";
 								
-								if (false == isNaN(height)) text += " height='"+height+"'";
-								if (false == isNaN(width)) text += " width='"+width+"'";
+								var atts = new Array('style', 'class', 'id', 'alt', 'width', 'height', 'border');
+								var temp = "";
 								
-								// text += "style='border-width: 0px;'";
+								for(var i=0; i< atts.length; i++) {
+									temp = c_ref.$.firstChild.getAttribute( atts[i] );
+									if (temp) text += " "+atts[i]+"='"+temp+"'";
+								}
 								
 								text += " />";
 							}
 						}
-						// for(var i in c_ref.$.firstChild) text += i+"== "+c_ref.$.firstChild[i]+"<br />\n\n";
+						
 						
 						wb_link = "<a href='"+wb_link+"' "+ class_name + ">"+text+"</a>";
 										
