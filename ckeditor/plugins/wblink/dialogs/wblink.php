@@ -195,7 +195,7 @@ CKEDITOR.dialog.add( 'wblinkDlg', function( editor ) {
 
 								text = "<img src='" + s + "' ";
 								
-								var atts = new Array('style', 'class', 'id', 'alt', 'width', 'height', 'border');
+								var atts = new Array('style', 'class', 'id', 'alt', 'width', 'height', 'border', 'title', 'longdesc', 'usemap');
 								var temp = "";
 								
 								for(var i=0; i< atts.length; i++) {
