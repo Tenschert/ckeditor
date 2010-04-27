@@ -131,7 +131,37 @@ CKEDITOR.dialog.add( 'wblinkDlg', function( editor ) {
                     	type: 'html',
                     	style: 'display: hidden',
                     	html: "<script><?php echo $page_titles; ?></script>"
-                    } ] 
+                    },{
+						/**
+						 *	Add "rel" pop-up-select to the ui
+						 */
+						id: 'cmbRel',
+						type: 'select',
+						label: 'Advisory Relation',
+						style: "width: 150px;",
+						labelLayout:'horizontal',
+						items: 
+						[
+							[ "not set",	0 ],
+							[ "Fancybox",	"fancybox" ],
+							[ "Lightbox",	"lightbox" ],
+							[ "PrettyPhoto","prettyPhoto" ],
+							[ "Alternate",	"alternate" ],
+							[ "Copyright",	"copyright" ],
+							[ "Designates",	"designates" ],
+							[ "No follow",	"nofollow" ],
+							[ "Stylesheet",	"stylesheet" ],
+							[ "Thumbnail",	"thumbnail" ]
+						],
+						setup: function ( obj ) {
+							// if ( obj.adv['advRel'] ) this.setValue( obj.adv['advRel'] );
+							alert("call");
+						},								
+						commit: function ( list_ref ) {
+							// list_ref['rel'] = this.getValue();
+						}
+					}
+                    ] 
             }
             ],
          onOk: function() {
@@ -145,7 +175,14 @@ CKEDITOR.dialog.add( 'wblinkDlg', function( editor ) {
          	
          	var class_name = this.getContentElement("tab1", "wblinkclass").getInputElement().getValue();
 			if (class_name.length > 0 ) class_name = " class='"+class_name+"' ";
-				
+			
+			var re = this.getContentElement("tab1", "cmbRel").getInputElement().getValue();
+			if (re != 0) {
+				rel = " rel='"+re+"'";
+			} else {
+				rel = "";
+			}
+			
 			/**
 			 *	Should we use the selected page-title instead of "[[wblinkxxx]]"?
 			 *
@@ -178,7 +215,7 @@ CKEDITOR.dialog.add( 'wblinkDlg', function( editor ) {
 					 *	Nothing selected ... so we simple append a link
 					 *
 					 */
-					wb_link = "<a href='"+wb_link+"' "+ class_name + ">"+link_text+"</a>";
+					wb_link = "<a href='"+wb_link+"' "+ class_name + rel +">"+link_text+"</a>";
 
 				} else {
 					
@@ -208,13 +245,13 @@ CKEDITOR.dialog.add( 'wblinkDlg', function( editor ) {
 						}
 						
 						
-						wb_link = "<a href='"+wb_link+"' "+ class_name + ">"+text+"</a>";
+						wb_link = "<a href='"+wb_link+"' "+ class_name + rel +">"+text+"</a>";
 										
 						selection.selectRanges( ranges );
 						
 					} else {
 					
-						wb_link = "<a href='"+wb_link+"' "+ class_name + ">"+link_text+"</a>";
+						wb_link = "<a href='"+wb_link+"' "+ class_name + rel +">"+link_text+"</a>";
 					}
 				}
 				
