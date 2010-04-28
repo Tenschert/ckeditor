@@ -1158,19 +1158,19 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
                             style: "width: 150px;",
                             items: 
                             [
-                                [ "not set",    "" ],
-                                [ "Fancybox",    "fancybox" ],
-                                [ "Lightbox",    "lightbox" ],
-                                [ "PrettyPhoto","prettyPhoto"],
-                                [ "Alternate",    "alternate" ],
-                                [ "Copyright",    "copyright"],
-                                [ "Designates",    "designates" ],
-                                [ "No follow",    "nofollow" ],
-                                [ "Stylesheet",    "stylesheet" ],
-                                [ "Thumbnail",    "thumbnail" ]
+                                [ "not set",	"" ],
+                                [ "Fancybox",	"fancybox" ],
+                                [ "Lightbox",	"lightbox" ],
+                                [ "PrettyPhoto","prettyPhoto" ],
+                                [ "Alternate",	"alternate" ],
+                                [ "Copyright",	"copyright" ],
+                                [ "Designates",	"designates" ],
+                                [ "No follow",	"nofollow" ],
+                                [ "Stylesheet",	"stylesheet" ],
+                                [ "Thumbnail",	"thumbnail" ]
                             ],
                             setup: function (type, element) {
-                                if (type == REL ) {
+                                if (type == LINK ) {
                                     this.setValue( element.getAttribute("rel") );
                                 }
                             },
