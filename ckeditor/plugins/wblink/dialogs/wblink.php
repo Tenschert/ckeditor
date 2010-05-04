@@ -92,7 +92,7 @@ $page_titles .= "";
 ?>
 CKEDITOR.dialog.add( 'wblinkDlg', function( editor ) {
     return { 
-        title: 'WB Link - Insert WebsiteBaker Link',
+        title: editor.lang.wblink.title,
         minWidth: 280,
         minHeight: 80,
         contents: [ 
@@ -103,7 +103,7 @@ CKEDITOR.dialog.add( 'wblinkDlg', function( editor ) {
                 elements : [{
                         id: 'wblinks',
                         type: 'select',
-                        label: "WB Page",
+                        label: editor.lang.wblink.page,
                         labelLayout:'horizontal',
 						widths:['20%','80%'],
 						style: 'width: 150px; margin-left: 10px; margin-top:-3px;',
@@ -112,7 +112,7 @@ CKEDITOR.dialog.add( 'wblinkDlg', function( editor ) {
                     }, {
                     	id: 'wblinkclass',
                     	type: 'text',
-                    	label: 'Class',
+                    	label: editor.lang.wblink.class,
                     	labelLayout:'horizontal',
 						widths:['50%','50%'],
 						style: 'width: 150px; margin-left: 10px, padding-left: 30px;',
@@ -120,7 +120,7 @@ CKEDITOR.dialog.add( 'wblinkDlg', function( editor ) {
                     }, {
                     	id: 'wblinkusepagename',
                     	type: 'checkbox',
-                    	label: 'use Pagetitle',
+                    	label: editor.lang.wblink.usepagetitle,
 						labelLayout:'horizontal',
 						widths:['50%','50%'],
 						value: 1,
@@ -137,12 +137,12 @@ CKEDITOR.dialog.add( 'wblinkDlg', function( editor ) {
 						 */
 						id: 'cmbRel',
 						type: 'select',
-						label: 'Advisory Relation',
+						label: editor.lang.wblink.advrel,
 						style: "width: 150px;",
 						labelLayout:'horizontal',
 						items: 
 						[
-							[ "not set",	0 ],
+							[ editor.lang.wblink.notset,	0 ],
 							[ "Fancybox",	"fancybox" ],
 							[ "Lightbox",	"lightbox" ],
 							[ "PrettyPhoto","prettyPhoto" ],

@@ -63,7 +63,7 @@ CKEDITOR.editorConfig = function( config )
     
     // The skin to load. It may be the name of the skin folder inside the editor installation path,  
     // or the name and the path separated by a comma. 
-    // Available skins: kama (default), office2003, office2007
+    // Available skins: kama (default), office2003, office2007, v2
     config.skin             = 'kama';
     
     // The standard height and width of CKEditor in pixels.
@@ -90,3 +90,49 @@ CKEDITOR.editorConfig = function( config )
     // Uncommenting this line doesn't mean the user will not be able to type PHP code in the source. This         // kind of prevention must be done in the server side, so just leave this line as is.
     config.protectedSource.push(/<\?[\s\S]*?\?>/g); // PHP Code
 };
+
+CKEDITOR.on( 'instanceReady', function( ev )
+{
+    var writer = ev.editor.dataProcessor.writer;
+    
+    // The character sequence to use for every indentation step.
+    writer.indentationChars = '\t';
+
+    // The way to close self closing tags, like <br />.
+    writer.selfClosingEnd = ' />';
+
+    // The character sequence to be used for line breaks.
+    writer.lineBreakChars = '\n';
+
+    // Setting rules for several HTML tags.
+    writer.setRules( 'p',
+    {
+        // Indicates that this tag causes indentation on line breaks inside of it.
+        indent : true,
+        // Insert a line break before the <p> tag.
+        breakBeforeOpen : true,
+        // Insert a line break after the <p> tag.
+        breakAfterOpen : false,
+        // Insert a line break before the </p> closing tag.
+        breakBeforeClose : false,
+        // Insert a line break after the </p> closing tag.
+        breakAfterClose : true
+    });
+    var dtd = CKEDITOR.dtd;
+    for (var e in CKEDITOR.tools.extend( {}, dtd.$block ))
+    {
+        writer.setRules( e,
+        {
+            // Indicates that this tag causes indentation on line breaks inside of it.
+            indent : true,
+            // Insert a line break before the <h1> tag.
+            breakBeforeOpen : true,
+            // Insert a line break after the <h1> tag.
+            breakAfterOpen : false,
+            // Insert a line break before the </h1> closing tag.
+            breakBeforeClose : false,
+            // Insert a line break after the </h1> closing tag.
+            breakAfterClose : true
+        });
+    }
+});

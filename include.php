@@ -44,9 +44,8 @@ global $page_template;
         // $sql = 'SELECT `template` FROM `'.TABLE_PREFIX.'pages` WHERE `page_id` = '.$pageid;
         // $template = $database->get_one($sql);
         $template = WB_PATH.'/templates/'.$page_template.$sub;
-        $template = file_exists($template)
-? str_replace(WB_PATH, WB_URL, $template)
-: str_replace(WB_PATH, WB_URL, $default_tpl);
+        $template = file_exists($template) 
+            ? str_replace(WB_PATH, WB_URL, $template) : str_replace(WB_PATH, WB_URL, $default_tpl);
     } else {
      $template = 'none';
     }
@@ -59,9 +58,9 @@ function get_css_template_name()
 // returns the template name of the current displayed page
     $ck_css_template_dir = get_ck_template('/editor.css');
     if( $ck_css_template_dir == 'none' )
-{
-$ck_css_template_dir = get_ck_template('/css/editor.css');
-}
+    {
+        $ck_css_template_dir = get_ck_template('/css/editor.css');
+    }
     return $ck_css_template_dir;
 }
 
@@ -88,23 +87,32 @@ function show_wysiwyg_editor($name, $id, $content, $width = '100%', $height = '3
 
     $ckeditor->basePath = WB_URL.'/modules/ckeditor/ckeditor/';
 
-// not working till yet
     $ckeditor->config['height'] = $height;
     $ckeditor->config['width'] = $width;
 
  // obtain template name of current page for editor.css (if empty, no editor.css files exists)
     $css_template_name = get_css_template_name();
-    $ckeditor->config['contentsCss'] = ( $css_template_name == 'none' )
-? WB_URL.'/modules/ckeditor/wb_config/editor.css'
-: $css_template_name;
+    if (file_exists(WB_PATH.'/modules/ckeditor/wb_config/custom/editor.css'))
+    {
+        $ck_editor_files = WB_URL.'/modules/ckeditor/wb_config/custom/editor.css';
+    } else {
+        $ck_editor_files = WB_URL.'/modules/ckeditor/wb_config/default/editor.css';
+    }
+    $ckeditor->config['contentsCss'] = ( $css_template_name == 'none' ) 
+        ? $ck_editor_files : $css_template_name;
 
     // obtain template name of current page for editor.styles.js (if empty, no editor.styles.js files exists)
     $styles_template_name = get_styles_template_name();
 
     // editor.styles.js file exists in default template folder, or template folder of current page
+    if (file_exists(WB_PATH.'/modules/ckeditor/wb_config/custom/editor.styles.js'))
+    {
+        $ck_styles_files = WB_URL.'/modules/ckeditor/wb_config/custom/editor.styles.js';
+    } else {
+        $ck_styles_files = WB_URL.'/modules/ckeditor/wb_config/default/editor.styles.js';
+    }
     $styles_url = ( $styles_template_name == "none" )
-? WB_URL.'/modules/ckeditor/wb_config/editor.styles.js'
-: $styles_template_name;
+        ? $ck_styles_files : $styles_template_name;
 
     // The Styles dropdown in the editor. The styles_set needs to be set in each editor.styles.js!
     $ckeditor->config['stylesSet'] = 'wb:'.$styles_url;
@@ -112,7 +120,12 @@ function show_wysiwyg_editor($name, $id, $content, $width = '100%', $height = '3
     // The templates definition set to use. It accepts a comma separated list.
     $ckeditor->config['templates'] = 'default';
     // The list of templates definition files to load.
-    $ck_templates_files[] = WB_URL.'/modules/ckeditor/wb_config/editor.templates.js';
+        if (file_exists(WB_PATH.'/modules/ckeditor/wb_config/custom/editor.templates.js'))
+    {
+        $ck_templates_files = WB_URL.'/modules/ckeditor/wb_config/custom/editor.templates.js';
+    } else {
+        $ck_templates_files = WB_URL.'/modules/ckeditor/wb_config/default/editor.templates.js';
+    }
     $ckeditor->config['templates_files'] = $ck_templates_files;
     
     // The filebrowser are called in the include, because later on we can make switches, use WB_URL and so on
@@ -121,10 +134,19 @@ function show_wysiwyg_editor($name, $id, $content, $width = '100%', $height = '3
     $ckeditor->config['filebrowserImageBrowseUrl'] = $ckeditor->basePath.'filemanager/browser/default/browser.html?Type=Image&Connector='.$connectorPath;
     $ckeditor->config['filebrowserFlashBrowseUrl'] = $ckeditor->basePath.'filemanager/browser/default/browser.html?Type=Flash&Connector='.$connectorPath;
     // The Uploader has to be called, too.
+    
     $uploadPath = $ckeditor->basePath.'filemanager/connectors/php/upload.php?Type=';
     $ckeditor->config['filebrowserUploadUrl'] = $uploadPath.'File';
     $ckeditor->config['filebrowserImageUploadUrl'] = $uploadPath.'Image';
     $ckeditor->config['filebrowserFlashUploadUrl'] = $uploadPath.'Flash';
+    
+    // Get the config file
+    if (file_exists(WB_PATH.'/modules/ckeditor/wb_config/custom/wb_ckconfig.js'))
+    {
+        $ckeditor->config['customConfig'] = WB_URL.'/modules/ckeditor/wb_config/custom/wb_ckconfig.js';
+    } else {
+        $ckeditor->config['customConfig'] = WB_URL.'/modules/ckeditor/wb_config/default/wb_ckconfig.js';
+    }
     
     $ckeditor->editor($name, reverse_htmlentities($content));
 

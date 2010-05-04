@@ -5,9 +5,10 @@ CKEDITOR.plugins.setLang( 'wblink', 'ru',
         btn :               'Вставить/Редактировать внутреннюю ссылку',
         title :             'Вставить внутреннюю ссылку',
         name :              'Вставка внутренней ссылки',
-        errselection :      'Пожалуйста выделите ссылающийся текст',
-        errpageselect :     'Выберите страницу чтобы сделать ссылку',
-        lblpageselection :  'Выберите страницу для ссылки:',
-        lbltitle :          'Заголовок'
+        page :              'WB Page',
+        class :             'CSS-Class',
+        usepagetitle :      'use pagetitle',
+        advrel :            'Advisory Relation',
+        notset :            'Not set'
     }
 })
