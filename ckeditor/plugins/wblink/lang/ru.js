@@ -6,7 +6,7 @@
         title :             'Вставить внутреннюю ссылку',
         name :              'Вставка внутренней ссылки',
         page :              'WB Page',
-        class :             'CSS-Class',
+        cssclass :          'CSS-Class',
         usepagetitle :      'use pagetitle',
         advrel :            'Advisory Relation',
         notset :            'Not set'

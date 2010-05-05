@@ -1,4 +1,4 @@
-CKEDITOR.plugins.setLang( 'wblink', 'en',
+﻿CKEDITOR.plugins.setLang( 'wblink', 'en',
 {
     wblink :
     {
@@ -6,7 +6,7 @@ CKEDITOR.plugins.setLang( 'wblink', 'en',
         title :             'WB Link - Insert internal link',
         name :              'WebsiteBaker Link insert',
         page :              'WB Page',
-        class :             'CSS-Class',
+        cssclass :          'CSS-Class',
         usepagetitle :      'use pagetitle',
         advrel :            'Advisory Relation',
         notset :            'Not set'

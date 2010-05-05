@@ -112,7 +112,7 @@ CKEDITOR.dialog.add( 'wblinkDlg', function( editor ) {
                     }, {
                     	id: 'wblinkclass',
                     	type: 'text',
-                    	label: editor.lang.wblink.class,
+                    	label: editor.lang.wblink.cssclass,
                     	labelLayout:'horizontal',
 						widths:['50%','50%'],
 						style: 'width: 150px; margin-left: 10px, padding-left: 30px;',

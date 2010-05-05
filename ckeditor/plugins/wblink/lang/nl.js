@@ -1,4 +1,4 @@
-CKEDITOR.plugins.setLang( 'wblink', 'nl',
+﻿CKEDITOR.plugins.setLang( 'wblink', 'nl',
 {
     wblink :
     {
@@ -6,7 +6,7 @@ CKEDITOR.plugins.setLang( 'wblink', 'nl',
         title :             'WB Link - voeg interne link toe',
         name :              'WebsiteBaker link toevoegen',
         page :              'WB Page',
-        class :             'CSS-Class',
+        cssclass :          'CSS-Class',
         usepagetitle :      'use pagetitle',
         advrel :            'Advisory Relation',
         notset :            'Not set'
