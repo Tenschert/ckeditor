@@ -77,7 +77,7 @@ if( $ck_styles_template_dir == 'none' )
     return $ck_styles_template_dir;
 }
 
-function show_wysiwyg_editor($name, $id, $content, $width = '100%', $height = '320px')
+function show_wysiwyg_editor($name, $id, $content, $width = '100%', $height = '350px')
 {
 
 // create new CKeditor instance
@@ -139,6 +139,9 @@ function show_wysiwyg_editor($name, $id, $content, $width = '100%', $height = '3
     $ckeditor->config['filebrowserUploadUrl'] = $uploadPath.'File';
     $ckeditor->config['filebrowserImageUploadUrl'] = $uploadPath.'Image';
     $ckeditor->config['filebrowserFlashUploadUrl'] = $uploadPath.'Flash';
+    
+    // Setup the CKE language
+    $ckeditor->config['language'] = strtolower(LANGUAGE);
     
     // Get the config file
     if (file_exists(WB_PATH.'/modules/ckeditor/wb_config/custom/wb_ckconfig.js'))

@@ -89,6 +89,12 @@ if($get_pages->numRows() > 0) {
 $list .= "]";
 $page_titles .= "";
 
+/**
+ *	Bugfix for IE, as the IE hasn't found the list in the class-scope,
+ *	so we've to try it to declare the list global here.
+ *
+ */
+echo $page_titles; 
 ?>
 CKEDITOR.dialog.add( 'wblinkDlg', function( editor ) {
     return { 
@@ -126,11 +132,6 @@ CKEDITOR.dialog.add( 'wblinkDlg', function( editor ) {
 						value: 1,
                     	validate: function() {}
                     
-                    }, { 
-                    	id: 'wblinkhiddenhtml',
-                    	type: 'html',
-                    	style: 'display: hidden',
-                    	html: "<script><?php echo $page_titles; ?></script>"
                     },{
 						/**
 						 *	Add "rel" pop-up-select to the ui
