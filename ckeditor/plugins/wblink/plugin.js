@@ -11,7 +11,6 @@
 CKEDITOR.plugins.add('wblink',
 {
     lang : ['en','de','nl','ru'],
-    requires: ['iframedialog'],
     init: function(editor)
     {
         var pluginName = 'wblink';
