@@ -41,7 +41,7 @@ function gen_page_list($parent) {
 			
 		$title = str_replace(
 			array("\"", "'"),
-			array("&quote;", "\\\'"),
+			array("&quote;", "\\'"),
 			$page['menu_title']
 		);
 		
