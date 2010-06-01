@@ -122,9 +122,9 @@ function show_wysiwyg_editor($name, $id, $content, $width = '100%', $height = '3
     // The list of templates definition files to load.
         if (file_exists(WB_PATH.'/modules/ckeditor/wb_config/custom/editor.templates.js'))
     {
-        $ck_templates_files = WB_URL.'/modules/ckeditor/wb_config/custom/editor.templates.js';
+        $ck_templates_files[] = WB_URL.'/modules/ckeditor/wb_config/custom/editor.templates.js';
     } else {
-        $ck_templates_files = WB_URL.'/modules/ckeditor/wb_config/default/editor.templates.js';
+        $ck_templates_files[] = WB_URL.'/modules/ckeditor/wb_config/default/editor.templates.js';
     }
     $ckeditor->config['templates_files'] = $ck_templates_files;
     
